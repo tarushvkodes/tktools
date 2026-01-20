@@ -185,7 +185,7 @@ const tools = [
         tags: ['milestone']
     },
     {
-        id: 'palette-gen',
+        id: 'oven-check',
         title: 'OvenCheck',
         description: 'Quick temperature reference for Fahrenheit to Celsius oven settings.',
         icon: '🌡️',
@@ -1734,6 +1734,13 @@ const tools = [
     },
     {
         id: 'round-price',
+        title: 'RoundPrice',
+        description: 'Calculate pre-tax prices to land on clean, round totals.',
+        icon: '🏷️',
+        path: 'tools/round-price/index.html',
+        isNew: true,
+        tags: ['finance', 'utility']
+    },
     {
         id: 'pixel-scale',
         title: 'PixelScale',
