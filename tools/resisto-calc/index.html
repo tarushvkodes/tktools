@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResistoCalc | Resistor Color Code Calculator</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        .resistor-visual { background: #d1d1d1; height: 60px; width: 200px; margin: 2rem auto; border-radius: 30px; display: flex; align-items: center; justify-content: space-around; padding: 0 20px; position: relative; }
+        .resistor-visual::before, .resistor-visual::after { content: ''; position: absolute; background: #888; height: 4px; width: 40px; top: 28px; z-index: -1; }
+        .resistor-visual::before { left: -40px; } .resistor-visual::after { right: -40px; }
+        .band { width: 12px; height: 100%; transition: background 0.2s; }
+        .band-1 { border-radius: 5px 0 0 5px; }
+        select { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 5px; border-radius: 4px; width: 100%; margin-bottom: 10px; }
+        .app-container { max-width: 600px; margin: 0 auto; padding: 2rem; }
+        .result-display { text-align: center; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 12px; margin-top: 1rem; }
+        .value { font-size: 2.5rem; font-weight: bold; color: #fdcb6e; }
+    </style>
+</head>
+<body style="background: #2d3436; color: white; font-family: sans-serif;">
+    <div class="app-container">
+        <a href="../../index.html" style="color: #aaa; text-decoration: none;">← Back</a>
+        <h1 style="text-align: center;">ResistoCalc</h1>
+        
+        <div class="resistor-visual">
+            <div id="v-band-1" class="band band-1" style="background: brown;"></div>
+            <div id="v-band-2" class="band" style="background: black;"></div>
+            <div id="v-band-3" class="band" style="background: red;"></div>
+            <div id="v-band-4" class="band" style="background: gold;"></div>
+        </div>
+
+        <div class="glass-panel" style="padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 12px;">
+            <label>1st Band</label>
+            <select id="band-1">
+                <option value="0" style="background:black">Black</option>
+                <option value="1" style="background:brown" selected>Brown</option>
+                <option value="2" style="background:red">Red</option>
+                <option value="3" style="background:orange">Orange</option>
+                <option value="4" style="background:yellow">Yellow</option>
+                <option value="5" style="background:green">Green</option>
+                <option value="6" style="background:blue">Blue</option>
+                <option value="7" style="background:purple">Violet</option>
+                <option value="8" style="background:gray">Gray</option>
+                <option value="9" style="background:white; color:black">White</option>
+            </select>
+            <label>2nd Band</label>
+            <select id="band-2">
+                <option value="0" style="background:black" selected>Black</option>
+                <option value="1" style="background:brown">Brown</option>
+                <option value="2" style="background:red">Red</option>
+                <option value="3" style="background:orange">Orange</option>
+                <option value="4" style="background:yellow">Yellow</option>
+                <option value="5" style="background:green">Green</option>
+                <option value="6" style="background:blue">Blue</option>
+                <option value="7" style="background:purple">Violet</option>
+                <option value="8" style="background:gray">Gray</option>
+                <option value="9" style="background:white; color:black">White</option>
+            </select>
+            <label>Multiplier</label>
+            <select id="band-3">
+                <option value="1" style="background:black">x1 (Black)</option>
+                <option value="10" style="background:brown">x10 (Brown)</option>
+                <option value="100" style="background:red" selected>x100 (Red)</option>
+                <option value="1000" style="background:orange">x1k (Orange)</option>
+                <option value="10000" style="background:yellow">x10k (Yellow)</option>
+                <option value="100000" style="background:green">x100k (Green)</option>
+                <option value="1000000" style="background:blue">x1M (Blue)</option>
+                <option value="0.1" style="background:gold">x0.1 (Gold)</option>
+                <option value="0.01" style="background:silver">x0.01 (Silver)</option>
+            </select>
+            <label>Tolerance</label>
+            <select id="band-4">
+                <option value="1" style="background:brown">±1% (Brown)</option>
+                <option value="2" style="background:red">±2% (Red)</option>
+                <option value="5" style="background:gold" selected>±5% (Gold)</option>
+                <option value="10" style="background:silver">±10% (Silver)</option>
+            </select>
+        </div>
+
+        <div class="result-display">
+            <div class="value" id="res-val">1,000 Ω</div>
+            <div id="res-tol" style="color: #aaa;">±5%</div>
+        </div>
+    </div>
+    <script>
+        const selects = ['band-1', 'band-2', 'band-3', 'band-4'];
+        const colors = {0:'black', 1:'brown', 2:'red', 3:'orange', 4:'yellow', 5:'green', 6:'blue', 7:'purple', 8:'gray', 9:'white', '1':'brown', '10':'brown', '100':'red', '1000':'orange', '10000':'yellow', '100000':'green', '1000000':'blue', '0.1':'gold', '0.01':'silver', '5':'gold', '10':'silver'};
+
+        function update() {
+            const b1 = document.getElementById('band-1').value;
+            const b2 = document.getElementById('band-2').value;
+            const mult = document.getElementById('band-3').value;
+            const tol = document.getElementById('band-4').value;
+
+            const val = (parseInt(b1) * 10 + parseInt(b2)) * parseFloat(mult);
+            
+            document.getElementById('res-val').textContent = val >= 1000000 ? (val/1000000).toFixed(1) + ' MΩ' : (val >= 1000 ? (val/1000).toFixed(1) + ' kΩ' : val.toFixed(0) + ' Ω');
+            document.getElementById('res-tol').textContent = '±' + tol + '%';
+
+            document.getElementById('v-band-1').style.background = colors[b1];
+            document.getElementById('v-band-2').style.background = colors[b2];
+            document.getElementById('v-band-3').style.background = colors[mult];
+            document.getElementById('v-band-4').style.background = colors[tol];
+        }
+
+        selects.forEach(id => document.getElementById(id).addEventListener('change', update));
+        update();
+    </script>
+</body>
+</html>

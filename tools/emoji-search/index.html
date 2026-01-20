@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmojiSearch | Instant Picker</title>
+</head>
+<body style="background: #fdfafd; color: #333; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <a href="../../index.html">← Back</a>
+        <h1>EmojiSearch 🔍😎</h1>
+        <input type="text" id="q" placeholder="Type to search (e.g. smile, fire, dog)..." style="width:100%; padding:15px; font-size: 1.2rem; border-radius: 30px; border: 1px solid #ddd; outline: none; margin-bottom: 2rem;">
+        <div id="res" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; font-size: 2rem;">
+            <!-- Emojis -->
+        </div>
+    </div>
+    <script>
+        const emojis = [
+            {e:"😀", n:"smile happy joy"}, {e:"🔥", n:"fire hot flame"}, {e:"🐶", n:"dog pet animal"},
+            {e:"🚀", n:"rocket space ship"}, {e:"💻", n:"computer tech code"}, {e:"🍕", n:"pizza food eat"},
+            {e:"❤️", n:"heart love like"}, {e:"✨", n:"sparkles magic shine"}, {e:"🎉", n:"party celebrate"},
+            {e:"💡", n:"idea light bulb"}, {e:"🛑", n:"stop sign red"}, {e:"✅", n:"check done yes"}
+        ];
+        function update() {
+            const q = document.getElementById('q').value.toLowerCase();
+            const filtered = emojis.filter(x => x.n.includes(q));
+            document.getElementById('res').innerHTML = filtered.map(x => `<span title="${x.n}" style="cursor:pointer;" onclick="navigator.clipboard.writeText('${x.e}')">${x.e}</span>`).join('');
+        }
+        document.getElementById('q').addEventListener('input', update);
+        update();
+    </script>
+</body>
+</html>

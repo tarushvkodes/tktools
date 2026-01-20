@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GradeEst | Weighted GPA</title>
+    <style>
+        body { background: #fdfafd; color: #334155; font-family: sans-serif; padding: 2rem; }
+        .app { max-width: 600px; margin: auto; }
+        .row { display: flex; gap: 10px; margin-bottom: 10px; }
+        input { padding: 10px; border: 1px solid #cbd5e1; border-radius: 5px; flex: 1; }
+        .res { font-size: 3rem; font-weight: bold; text-align: center; color: #0f172a; margin-top: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html" style="color: #64748b;">← Back</a>
+        <h1>GradeEst 🎓📊</h1>
+        <p>Enter your assignment scores and their weights.</p>
+        <div id="list">
+            <div class="row"><input type="number" class="s" placeholder="Score %" value="90"><input type="number" class="w" placeholder="Weight %" value="20"></div>
+            <div class="row"><input type="number" class="s" placeholder="Score %" value="85"><input type="number" class="w" placeholder="Weight %" value="30"></div>
+            <div class="row"><input type="number" class="s" placeholder="Score %" value="100"><input type="number" class="w" placeholder="Weight %" value="50"></div>
+        </div>
+        <div class="res" id="out">93.5%</div>
+    </div>
+    <script>
+        function update() {
+            const scores = document.querySelectorAll('.s');
+            const weights = document.querySelectorAll('.w');
+            let total = 0, weightSum = 0;
+            scores.forEach((s, i) => {
+                const sv = parseFloat(s.value) || 0;
+                const wv = parseFloat(weights[i].value) || 0;
+                total += (sv * (wv / 100));
+                weightSum += wv;
+            });
+            document.getElementById('out').textContent = (total / (weightSum/100)).toFixed(1) + "%";
+        }
+        document.getElementById('list').addEventListener('input', update);
+    </script>
+</body>
+</html>

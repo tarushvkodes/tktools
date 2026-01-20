@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CitGen | Simple Citation</title>
+    <style>
+        body { background: #f1f5f9; color: #1e293b; font-family: serif; padding: 2rem; }
+        .app { max-width: 600px; margin: auto; }
+        input { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #cbd5e1; }
+        .res { background: white; padding: 1rem; border-left: 5px solid #3b82f6; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html">← Back</a>
+        <h1>CitGen 📖✒️</h1>
+        <input type="text" id="a" placeholder="Author (Last, First)">
+        <input type="text" id="t" placeholder="Title of Book">
+        <input type="text" id="p" placeholder="Publisher">
+        <input type="number" id="y" placeholder="Year">
+        <div class="res" id="out">...</div>
+    </div>
+    <script>
+        function update() {
+            const a = document.getElementById('a').value;
+            const t = document.getElementById('t').value;
+            const p = document.getElementById('p').value;
+            const y = document.getElementById('y').value;
+            document.getElementById('out').textContent = `${a}. ${t}. ${p}, ${y}.`;
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+    </script>
+</body>
+</html>

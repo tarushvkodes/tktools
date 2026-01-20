@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadingSpeed | WPM Tapper</title>
+</head>
+<body style="background: #2d3436; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+        <a href="../../index.html" style="color: #636e72;">← Back</a>
+        <h1>ReadingSpeed 📖⚡</h1>
+        <p>Tap "PAGE TURN" every time you finish a page.</p>
+        <div id="btn" style="width: 250px; height: 100px; background: #00b894; color: white; border-radius: 12px; margin: 2rem auto; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; cursor: pointer;">PAGE TURN</div>
+        <label>Words Per Page (Avg)</label><input type="number" id="w" value="300" style="width: 100px; padding: 10px; text-align: center; background: #111; color: white; border: 1px solid #444; border-radius: 8px;">
+        <div style="font-size: 4rem; font-weight: bold; margin-top: 2rem;"><span id="res">0</span> WPM</div>
+    </div>
+    <script>
+        let lastTime, wpm = [];
+        document.getElementById('btn').addEventListener('click', () => {
+            const now = Date.now();
+            if(lastTime) {
+                const elapsed = (now - lastTime) / 60000;
+                const words = parseInt(document.getElementById('w').value) || 300;
+                wpm.push(words / elapsed);
+                if(wpm.length > 3) wpm.shift();
+                const avg = wpm.reduce((a,b) => a+b) / wpm.length;
+                document.getElementById('res').textContent = Math.round(avg);
+            }
+            lastTime = now;
+            document.getElementById('btn').textContent = "TAP AGAIN NEXT PAGE";
+        });
+    </script>
+</body>
+</html>

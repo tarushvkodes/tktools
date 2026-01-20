@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MacroSplit | Nutrition Planner</title>
+</head>
+<body style="background: #6c5ce7; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>MacroSplit 🥑🍗🍚</h1>
+        <div style="background: rgba(0,0,0,0.1); padding: 2rem; border-radius: 12px;">
+            <label>Target Calories</label><input type="number" id="cal" value="2000" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="display: flex; gap: 10px;">
+                <div style="flex:1"><label>Protein %</label><input type="number" id="p" value="30" style="width:100%; padding:10px;"></div>
+                <div style="flex:1"><label>Carb %</label><input type="number" id="c" value="40" style="width:100%; padding:10px;"></div>
+                <div style="flex:1"><label>Fat %</label><input type="number" id="f" value="30" style="width:100%; padding:10px;"></div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 2rem; text-align: center;">
+                <div style="background: white; color: #6c5ce7; padding: 1rem; border-radius: 8px;">
+                    <div style="font-size: 1.5rem; font-weight: bold;" id="res-p">150g</div>
+                    <div>Protein</div>
+                </div>
+                <div style="background: white; color: #6c5ce7; padding: 1rem; border-radius: 8px;">
+                    <div style="font-size: 1.5rem; font-weight: bold;" id="res-c">200g</div>
+                    <div>Carbs</div>
+                </div>
+                <div style="background: white; color: #6c5ce7; padding: 1rem; border-radius: 8px;">
+                    <div style="font-size: 1.5rem; font-weight: bold;" id="res-f">67g</div>
+                    <div>Fats</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const cal = parseFloat(document.getElementById('cal').value) || 0;
+            const p = parseFloat(document.getElementById('p').value) || 0;
+            const c = parseFloat(document.getElementById('c').value) || 0;
+            const f = parseFloat(document.getElementById('f').value) || 0;
+            document.getElementById('res-p').textContent = Math.round((cal * (p/100)) / 4) + "g";
+            document.getElementById('res-c').textContent = Math.round((cal * (c/100)) / 4) + "g";
+            document.getElementById('res-f').textContent = Math.round((cal * (f/100)) / 9) + "g";
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

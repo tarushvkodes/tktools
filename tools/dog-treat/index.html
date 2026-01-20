@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DogTreat | Calorie Limit</title>
+</head>
+<body style="background: #e67e22; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>DogTreat 🦴🍎</h1>
+        <div style="background: rgba(0,0,0,0.1); padding: 2rem; border-radius: 12px;">
+            <label>Dog Weight (kg)</label><input type="number" id="w" value="20" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="background: white; color: #d35400; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 0.9rem;">Daily Treat Allowance</div>
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res">85</span> kcal</div>
+                <p style="font-size: 0.8rem; margin-top: 10px;">*The 10% rule: Treats should not exceed 10% of daily calories.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const w = parseFloat(document.getElementById('w').value) || 0;
+            // RER = 70 * (weight)^0.75
+            const rer = 70 * Math.pow(w, 0.75);
+            const allowance = rer * 0.1;
+            document.getElementById('res').textContent = Math.round(allowance);
+        }
+        document.getElementById('w').addEventListener('input', update);
+        update();
+    </script>
+</body>
+</html>

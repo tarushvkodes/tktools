@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClientTracker | CRM Lite</title>
+    <style>
+        body { background: #f5f6fa; font-family: sans-serif; padding: 2rem; }
+        .app { max-width: 800px; margin: auto; }
+        .input-bar { background: white; padding: 1.5rem; border-radius: 10px; display: flex; gap: 10px; margin-bottom: 2rem; }
+        input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        button { background: #44bd32; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+        .client-card { background: white; padding: 1rem; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .status { padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; background: #fbc531; color: #2f3640; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html">← Back</a>
+        <h1>ClientTracker 📁🤝</h1>
+        <div class="input-bar">
+            <input type="text" id="name" placeholder="Client Name">
+            <input type="text" id="project" placeholder="Project">
+            <button onclick="add()">ADD CLIENT</button>
+        </div>
+        <div id="list"></div>
+    </div>
+    <script>
+        function render() {
+            const data = JSON.parse(localStorage.getItem('tk-clients') || '[]');
+            document.getElementById('list').innerHTML = data.map((c, i) => `
+                <div class="client-card">
+                    <div>
+                        <strong>${c.name}</strong><br>
+                        <small>${c.project}</small>
+                    </div>
+                    <div>
+                        <span class="status">Active</span>
+                        <button onclick="del(${i})" style="background:#e84118; margin-left:10px;">X</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        function add() {
+            const name = document.getElementById('name').value;
+            const project = document.getElementById('project').value;
+            if(!name) return;
+            const data = JSON.parse(localStorage.getItem('tk-clients') || '[]');
+            data.push({name, project});
+            localStorage.setItem('tk-clients', JSON.stringify(data));
+            render();
+        }
+        function del(i) {
+            const data = JSON.parse(localStorage.getItem('tk-clients') || '[]');
+            data.splice(i, 1);
+            localStorage.setItem('tk-clients', JSON.stringify(data));
+            render();
+        }
+        render();
+    </script>
+</body>
+</html>

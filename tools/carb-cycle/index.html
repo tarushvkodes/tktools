@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarbCycle | Nutrition Planner</title>
+</head>
+<body style="background: #ffa502; color: #2f3542; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #2f3542;">← Back</a>
+        <h1>CarbCycle 🍚</h1>
+        <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <label>Current Weight (kg)</label>
+            <input type="number" id="w" value="75" style="width:100%; padding:10px; margin-bottom:20px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+                <div style="text-align: center; padding: 10px; border: 1px solid #eee;">
+                    <div style="font-weight: bold; color: #ff4757;">High Day</div>
+                    <div id="res-h">225g</div>
+                </div>
+                <div style="text-align: center; padding: 10px; border: 1px solid #eee;">
+                    <div style="font-weight: bold; color: #ffa502;">Med Day</div>
+                    <div id="res-m">150g</div>
+                </div>
+                <div style="text-align: center; padding: 10px; border: 1px solid #eee;">
+                    <div style="font-weight: bold; color: #2ed573;">Low Day</div>
+                    <div id="res-l">75g</div>
+                </div>
+            </div>
+            <p style="font-size: 0.8rem; color: #777; margin-top: 1rem;">*Approx. calculation: 3g/kg (High), 2g/kg (Med), 1g/kg (Low).</p>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const w = parseFloat(document.getElementById('w').value) || 0;
+            document.getElementById('res-h').textContent = Math.round(w * 3) + "g";
+            document.getElementById('res-m').textContent = Math.round(w * 2) + "g";
+            document.getElementById('res-l').textContent = Math.round(w * 1) + "g";
+        }
+        document.getElementById('w').addEventListener('input', update);
+        update();
+    </script>
+</body>
+</html>

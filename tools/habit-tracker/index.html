@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HabitTracker | Daily Wins</title>
+</head>
+<body style="background: #fdfafd; color: #333; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html">← Back</a>
+        <h1>HabitTracker 📅✅</h1>
+        <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <input type="text" id="h" placeholder="New habit (e.g. Read 10 mins)..." style="flex:1; padding:10px;">
+                <button id="add" style="background: #00b894; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">ADD</button>
+            </div>
+            <div id="list">
+                <!-- Habits -->
+            </div>
+        </div>
+    </div>
+    <script>
+        function render() {
+            const habits = JSON.parse(localStorage.getItem('tk-habits') || '[]');
+            document.getElementById('list').innerHTML = habits.map((h, i) => `
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee;">
+                    <span>${h}</span>
+                    <input type="checkbox">
+                </div>
+            `).join('');
+        }
+        document.getElementById('add').addEventListener('click', () => {
+            const h = document.getElementById('h').value;
+            if(!h) return;
+            const habits = JSON.parse(localStorage.getItem('tk-habits') || '[]');
+            habits.push(h);
+            localStorage.setItem('tk-habits', JSON.stringify(habits));
+            document.getElementById('h').value = '';
+            render();
+        });
+        render();
+    </script>
+</body>
+</html>

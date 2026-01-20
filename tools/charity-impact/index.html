@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CharityImpact | Donation Value</title>
+</head>
+<body style="background: #eb4d4b; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>CharityImpact ❤️</h1>
+        <p>Visualize what your donation can achieve.</p>
+        <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px;">
+            <label>Donation Amount ($)</label>
+            <input type="number" id="amt" value="25" style="width:100%; padding:10px; margin-bottom:20px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div style="background: white; color: #333; padding: 1rem; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 2rem; font-weight: bold;" id="res-meals">12</div>
+                    <div>Meals Provided</div>
+                </div>
+                <div style="background: white; color: #333; padding: 1rem; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 2rem; font-weight: bold;" id="res-trees">5</div>
+                    <div>Trees Planted</div>
+                </div>
+            </div>
+            <p style="font-size: 0.8rem; margin-top: 1rem; opacity: 0.8;">*Estimates based on global averages ($1.90/meal, $5/tree).</p>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const a = parseFloat(document.getElementById('amt').value) || 0;
+            document.getElementById('res-meals').textContent = Math.floor(a / 1.9);
+            document.getElementById('res-trees').textContent = Math.floor(a / 5);
+        }
+        document.getElementById('amt').addEventListener('input', update);
+        update();
+    </script>
+</body>
+</html>

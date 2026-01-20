@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExposureTri | Camera Sim</title>
+    <style>
+        body { background: #1e272e; color: white; font-family: sans-serif; padding: 2rem; }
+        .app { max-width: 600px; margin: auto; }
+        .preview { height: 200px; background: #000; border-radius: 15px; margin-bottom: 2rem; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .box { width: 50px; height: 50px; background: white; transition: all 0.3s; }
+        input { width: 100%; margin-bottom: 1rem; }
+        .label { display: flex; justify-content: space-between; font-size: 0.9rem; color: #aaa; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html" style="color: #aaa;">← Back</a>
+        <h1>ExposureTri 📷📐</h1>
+        <div class="preview" id="pv"><div class="box" id="obj"></div></div>
+        
+        <div class="label"><span>Aperture (Blur)</span><span id="v-ap">f/2.8</span></div>
+        <input type="range" id="ap" min="1.4" max="16" step="0.1" value="2.8">
+        
+        <div class="label"><span>Shutter (Motion)</span><span id="v-sh">1/100</span></div>
+        <input type="range" id="sh" min="1" max="1000" value="100">
+        
+        <div class="label"><span>ISO (Noise)</span><span id="v-is">100</span></div>
+        <input type="range" id="is" min="100" max="6400" step="100" value="100">
+    </div>
+    <script>
+        function update() {
+            const ap = parseFloat(document.getElementById('ap').value);
+            const sh = parseFloat(document.getElementById('sh').value);
+            const iso = parseFloat(document.getElementById('is').value);
+            
+            document.getElementById('v-ap').textContent = "f/" + ap;
+            document.getElementById('v-sh').textContent = "1/" + sh;
+            document.getElementById('v-is').textContent = iso;
+            
+            // Exposure calculation (Simulated)
+            const exposure = (iso * (1/ap*ap) * (1/sh)) * 100;
+            document.getElementById('pv').style.opacity = Math.min(1.5, exposure);
+            document.getElementById('obj').style.filter = `blur(${Math.max(0, (5-ap))}px)`;
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

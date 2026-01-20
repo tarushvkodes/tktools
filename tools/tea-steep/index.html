@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeaSteep | Optimal Infusion</title>
+</head>
+<body style="background: #a8d5ba; color: #2d5a27; font-family: serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html">← Back</a>
+        <h1>TeaSteep 🍵</h1>
+        <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <label>Tea Type</label>
+            <select id="t" style="width:100%; padding:10px; margin-bottom:20px;">
+                <option value="80,3">Green Tea (80°C / 3m)</option>
+                <option value="100,5">Black Tea (100°C / 5m)</option>
+                <option value="85,4">Oolong (85°C / 4m)</option>
+                <option value="100,7">Herbal (100°C / 7m)</option>
+            </select>
+            <div style="background: #2d5a27; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 1.2rem;">Optimal Temperature</div>
+                <div style="font-size: 2.5rem; font-weight: bold;" id="res-temp">80°C</div>
+                <div style="margin-top: 10px; font-size: 1.2rem;">Steep Time</div>
+                <div style="font-size: 2.5rem; font-weight: bold;" id="res-time">3 Min</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const [temp, time] = document.getElementById('t').value.split(',');
+            document.getElementById('res-temp').textContent = temp + "°C";
+            document.getElementById('res-time').textContent = time + " Min";
+        }
+        document.getElementById('t').addEventListener('change', update);
+    </script>
+</body>
+</html>

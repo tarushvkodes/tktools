@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThymolCalc | Beekeeping Solution Calculator</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="app-container">
+        <header class="app-header">
+            <a href="../../index.html" class="back-link">← TKTools</a>
+            <h1>ThymolCalc</h1>
+            <p>Precise emulsified thymol solution calculator for Varroa treatment.</p>
+        </header>
+
+        <main class="calc-grid">
+            <!-- Input Section -->
+            <section class="glass-panel input-panel">
+                <h2>1. Calculate Premix</h2>
+                <div class="tabs">
+                    <button class="tab-btn active" data-mode="by-crystal">By Crystals (g)</button>
+                    <button class="tab-btn" data-mode="by-volume">By Final Volume (ml)</button>
+                </div>
+
+                <div class="input-group" id="group-crystal">
+                    <label>Thymol Crystals (g)</label>
+                    <input type="number" id="input-crystal" value="30" min="1" step="0.5">
+                    <small>Standard batch starts with 30g.</small>
+                </div>
+
+                <div class="input-group hidden" id="group-volume">
+                    <label>Desired Premix Volume (ml)</label>
+                    <input type="number" id="input-volume" value="175" min="10" step="1">
+                </div>
+
+                <div class="separator"></div>
+
+                <h2>2. Syrup Dosing (Optional)</h2>
+                <div class="input-group">
+                    <label>Sugar Syrup Volume (Liters)</label>
+                    <input type="number" id="input-syrup" value="0" min="0" step="0.5">
+                    <small>How much feed are you making?</small>
+                </div>
+            </section>
+
+            <!-- Result Section -->
+            <section class="glass-panel result-panel">
+                <h2>Recipe Ingredients</h2>
+                <div class="result-card">
+                    <div class="result-row">
+                        <span>Thymol Crystals</span>
+                        <span class="value" id="res-crystals">30 g</span>
+                    </div>
+                    <div class="result-row">
+                        <span>Isopropyl Alcohol (IPA)</span>
+                        <span class="value" id="res-ipa">5 ml</span>
+                    </div>
+                    <div class="result-row">
+                        <span>Boiling Water</span>
+                        <span class="value" id="res-water">140 ml</span>
+                    </div>
+                    <div class="result-row">
+                        <span>Lecithin Granules</span>
+                        <span class="value" id="res-lecithin">3 g</span>
+                    </div>
+                    <div class="separator-light"></div>
+                    <div class="result-row highlight">
+                        <span>Total Premix Yield</span>
+                        <span class="value" id="res-yield">~175 ml</span>
+                    </div>
+                </div>
+
+                <div class="dosing-card hidden" id="dosing-result">
+                    <h3>Dosing for Syrup</h3>
+                    <p>Add <strong id="res-dose-amount">0 ml</strong> of this premix to your <span id="res-syrup-vol">0 L</span> of syrup.</p>
+                    <small>Rate: 5ml premix per UK Gallon (4.54L)</small>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

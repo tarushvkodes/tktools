@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThreadPitch | Bolt Identifier</title>
+</head>
+<body style="background: #34495e; color: #ecf0f1; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #7f8c8d;">← Back</a>
+        <h1>ThreadPitch 🔩🔍</h1>
+        <div style="background: #2c3e50; padding: 2rem; border-radius: 12px;">
+            <label>Measured Diameter (mm)</label><input type="number" id="d" value="8" step="0.1" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Threads Per 10mm</label><input type="number" id="c" value="8" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="background: white; color: #2c3e50; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 0.9rem;">Probable Bolt Size</div>
+                <div style="font-size: 2.5rem; font-weight: bold;" id="res">M8 x 1.25</div>
+                <p style="font-size: 0.8rem; margin-top: 10px;">*Common Metric standard identifier.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const d = parseFloat(document.getElementById('d').value) || 0;
+            const c = parseFloat(document.getElementById('c').value) || 1;
+            const pitch = 10 / c;
+            document.getElementById('res').textContent = "M" + Math.round(d) + " x " + pitch.toFixed(2);
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

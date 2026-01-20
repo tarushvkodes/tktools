@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EloGain | Rating Predictor</title>
+</head>
+<body style="background: #2c3e50; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #95a5a6;">← Back</a>
+        <h1>EloGain 📈🏆</h1>
+        <div style="background: rgba(0,0,0,0.2); padding: 2rem; border-radius: 12px;">
+            <label>Your Rating</label><input type="number" id="y" value="1200" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Opponent Rating</label><input type="number" id="o" value="1300" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>K-Factor (Usually 32)</label><input type="number" id="k" value="32" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: center;">
+                <div style="background: #27ae60; padding: 1rem; border-radius: 8px;">
+                    <div style="font-size: 1.5rem; font-weight: bold;">+<span id="win">20</span></div>
+                    <div>If You Win</div>
+                </div>
+                <div style="background: #c0392b; padding: 1rem; border-radius: 8px;">
+                    <div style="font-size: 1.5rem; font-weight: bold;"><span id="loss">-12</span></div>
+                    <div>If You Lose</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const y = parseFloat(document.getElementById('y').value) || 0;
+            const o = parseFloat(document.getElementById('o').value) || 0;
+            const k = parseFloat(document.getElementById('k').value) || 32;
+            const ea = 1 / (1 + Math.pow(10, (o - y) / 400));
+            document.getElementById('win').textContent = Math.round(k * (1 - ea));
+            document.getElementById('loss').textContent = Math.round(k * (0 - ea));
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookShelf | Sag Estimator</title>
+</head>
+<body style="background: #5d4037; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #a1887f;">← Back</a>
+        <h1>BookShelf 📚📉</h1>
+        <div style="background: rgba(0,0,0,0.2); padding: 2rem; border-radius: 12px;">
+            <label>Shelf Span (inches)</label><input type="number" id="s" value="36" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Material</label>
+            <select id="m" style="width:100%; padding:10px; margin-bottom:15px;">
+                <option value="1">Solid Pine</option>
+                <option value="2">MDF / Particle Board</option>
+                <option value="0.5">Oak / Hardwood</option>
+            </select>
+            <div style="background: white; color: #5d4037; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 0.9rem;">Sag Risk</div>
+                <div style="font-size: 2rem; font-weight: bold;" id="res">Moderate</div>
+                <p id="desc" style="font-size: 0.8rem; margin-top: 10px;">At 36", MDF will sag under heavy books.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const s = parseFloat(document.getElementById('s').value) || 0;
+            const m = parseFloat(document.getElementById('m').value);
+            const score = s * m;
+            let v = "Low"; let d = "Solid Choice.";
+            if(score > 40) { v = "High"; d = "Warning: Likely to sag significantly."; }
+            else if(score > 25) { v = "Moderate"; d = "Keep loads light or add support."; }
+            document.getElementById('res').textContent = v;
+            document.getElementById('desc').textContent = d;
+        }
+        document.querySelectorAll('input, select').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

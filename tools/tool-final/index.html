@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolFinal | 400 Complete!</title>
+</head>
+<body style="background: #000; color: gold; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; text-align: center; overflow: hidden;">
+    <div>
+        <h1 style="font-size: 8rem; margin: 0; text-shadow: 0 0 20px gold;">400</h1>
+        <p style="font-size: 2rem;">UNIQUE TOOLS COMPLETED</p>
+        <p style="color: #555;">200 Calculators + 200 Non-Calculators</p>
+        <a href="../../index.html" style="color: gold; text-decoration: none; border: 2px solid gold; padding: 15px 30px; border-radius: 10px; display: inline-block; margin-top: 2rem; font-weight: bold;">EXPLORE REPOSITORY</a>
+    </div>
+    <script>
+        // Confetti effect
+        const canvas = document.createElement('canvas');
+        document.body.appendChild(canvas);
+        canvas.style.position = 'fixed'; canvas.style.top = '0'; canvas.style.left = '0'; canvas.style.zIndex = '-1';
+        const ctx = canvas.getContext('2d');
+        let w = canvas.width = window.innerWidth;
+        let h = canvas.height = window.innerHeight;
+        const pieces = [];
+        for(let i=0; i<100; i++) pieces.push({x:Math.random()*w, y:Math.random()*h, r:Math.random()*5+2, c:`hsl(${Math.random()*360}, 100%, 50%)`, v:Math.random()*3+1});
+        function draw() {
+            ctx.clearRect(0,0,w,h);
+            pieces.forEach(p => {
+                ctx.fillStyle = p.c;
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
+                p.y += p.v; if(p.y > h) p.y = -10;
+            });
+            requestAnimationFrame(draw);
+        }
+        draw();
+    </script>
+</body>
+</html>

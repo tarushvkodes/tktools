@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoomPaint | Gallon Estimator</title>
+</head>
+<body style="background: #9b59b6; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>RoomPaint 🎨</h1>
+        <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px;">
+            <label>Wall Length Total (ft)</label><input type="number" id="l" value="40" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Wall Height (ft)</label><input type="number" id="h" value="8" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Number of Coats</label><input type="number" id="c" value="2" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="background: white; color: #8e44ad; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 2rem; font-weight: bold;"><span id="res">1.8</span> Gallons</div>
+                <div>Paint to Purchase</div>
+                <p style="font-size: 0.8rem; margin-top: 5px;">*Assumes ~350 sq ft per gallon.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const l = parseFloat(document.getElementById('l').value) || 0;
+            const h = parseFloat(document.getElementById('h').value) || 0;
+            const c = parseFloat(document.getElementById('c').value) || 1;
+            const sqFt = l * h * c;
+            const gallons = sqFt / 350;
+            document.getElementById('res').textContent = gallons.toFixed(1);
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

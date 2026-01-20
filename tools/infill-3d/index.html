@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infill3d | Pattern Guide</title>
+    <style>
+        body { background: #34495e; color: white; font-family: sans-serif; padding: 2rem; }
+        .app { max-width: 800px; margin: auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+        .card { background: #2c3e50; padding: 1rem; border-radius: 12px; border: 1px solid #7f8c8d; }
+        .pattern { height: 100px; background: #34495e; border-radius: 8px; margin-bottom: 10px; position: relative; overflow: hidden; }
+        .line { position: absolute; background: #e67e22; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html" style="color: #bdc3c7;">← Back</a>
+        <h1>Infill3d 🖨️🧱</h1>
+        <p>Common 3D printing infill patterns and their uses.</p>
+        <div class="grid">
+            <div class="card">
+                <div class="pattern" style="background: repeating-linear-gradient(45deg, transparent, transparent 10px, #e67e22 10px, #e67e22 12px);"></div>
+                <strong>Grid</strong>
+                <p style="font-size: 0.8rem; color: #aaa;">Fastest, average strength.</p>
+            </div>
+            <div class="card">
+                <div class="pattern" style="background: repeating-linear-gradient(45deg, transparent, transparent 10px, #e67e22 10px, #e67e22 12px), repeating-linear-gradient(-45deg, transparent, transparent 10px, #e67e22 10px, #e67e22 12px);"></div>
+                <strong>Cross</strong>
+                <p style="font-size: 0.8rem; color: #aaa;">Structural, good for rigid parts.</p>
+            </div>
+            <div class="card">
+                <div class="pattern" style="background: radial-gradient(circle, #e67e22 2px, transparent 2px); background-size: 15px 15px;"></div>
+                <strong>Gyroid</strong>
+                <p style="font-size: 0.8rem; color: #aaa;">Strongest in all directions.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetYears | Human Age Sim</title>
+    <style>
+        body { background: #f1c40f; color: #2c3e50; font-family: sans-serif; padding: 2rem; text-align: center; }
+        .app { max-width: 500px; margin: auto; }
+        input { width: 100%; padding: 15px; border-radius: 10px; border: none; font-size: 1.5rem; text-align: center; margin: 1rem 0; }
+        .res { font-size: 4rem; font-weight: bold; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html" style="color: #fff;">← Back</a>
+        <h1>PetYears 🐶🐱</h1>
+        <p>Your pet's age in human years.</p>
+        <select id="t" style="width:100%; padding:10px;">
+            <option value="7">Dog (Medium)</option>
+            <option value="6">Cat</option>
+            <option value="12">Rabbit</option>
+        </select>
+        <input type="number" id="a" value="3" min="1">
+        <div class="res" id="out">21</div>
+        <p>Human Years Old</p>
+    </div>
+    <script>
+        function update() {
+            const mult = parseFloat(document.getElementById('t').value);
+            const age = parseFloat(document.getElementById('a').value) || 0;
+            document.getElementById('out').textContent = Math.round(age * mult);
+        }
+        document.querySelectorAll('input, select').forEach(i => i.addEventListener('input', update));
+    </script>
+</body>
+</html>

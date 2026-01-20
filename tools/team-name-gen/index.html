@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeamNameGen | Random Squad Names</title>
+</head>
+<body style="background: #6c5ce7; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>TeamNameGen 🛡️🚩</h1>
+        <div id="res" style="font-size: 3rem; font-weight: bold; margin: 3rem 0;">The Digital Dragons</div>
+        <div id="btn" style="background: #a29bfe; padding: 1.5rem; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 1.2rem;">NEW TEAM NAME</div>
+    </div>
+    <script>
+        const a = ["Digital", "Iron", "Cyber", "Shadow", "Neon", "Golden", "Atomic", "Secret", "Velvet", "Raging"];
+        const b = ["Dragons", "Ninjas", "Wolves", "Knights", "Snakes", "Pirates", "Vipers", "Titans", "Eagles", "Sharks"];
+        function gen() {
+            const name = a[Math.floor(Math.random()*a.length)] + " " + b[Math.floor(Math.random()*b.length)];
+            document.getElementById('res').textContent = "The " + name;
+        }
+        document.getElementById('btn').addEventListener('click', gen);
+        gen();
+    </script>
+</body>
+</html>

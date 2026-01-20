@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiceOdds | Probability Calculator</title>
+</head>
+<body style="background: #2f3542; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #70a1ff;">← Back</a>
+        <h1>DiceOdds 🎲</h1>
+        <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px;">
+            <label>Roll (e.g., 2d6)</label>
+            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <input type="number" id="n" value="2" style="width: 50px; padding: 10px;">
+                <span>d</span>
+                <input type="number" id="d" value="6" style="width: 50px; padding: 10px;">
+            </div>
+            <label>Target Sum</label>
+            <input type="number" id="t" value="7" style="width:100%; padding:10px;">
+            <div style="text-align: center; margin-top: 2rem;">
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res">16.7</span>%</div>
+                <div>Chance to hit exactly target</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const n = parseInt(document.getElementById('n').value) || 1;
+            const d = parseInt(document.getElementById('d').value) || 1;
+            const t = parseInt(document.getElementById('t').value) || 1;
+            
+            // Simple recursive/iterative distribution (limited to prevent freeze)
+            if(n > 10) return; 
+            
+            let dist = [1];
+            for(let i=0; i<n; i++) {
+                let next = new Array(dist.length + d).fill(0);
+                for(let j=0; j<dist.length; j++) {
+                    for(let k=1; k<=d; k++) {
+                        next[j+k] += dist[j];
+                    }
+                }
+                dist = next;
+            }
+            
+            const total = Math.pow(d, n);
+            const count = dist[t] || 0;
+            document.getElementById('res').textContent = ((count / total) * 100).toFixed(1);
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

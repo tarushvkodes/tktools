@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompostMix | C:N Ratio Tool</title>
+</head>
+<body style="background: #5d4037; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #a1887f;">← Back</a>
+        <h1>CompostMix 🍂</h1>
+        <div style="background: #4e342e; padding: 2rem; border-radius: 12px;">
+            <label>Amount of Greens (Nitrogen - e.g. Scraps)</label>
+            <input type="number" id="g" value="1" style="width:100%; padding:10px; margin-bottom:20px;">
+            <label>Amount of Browns (Carbon - e.g. Cardboard)</label>
+            <input type="number" id="b" value="2" style="width:100%; padding:10px; margin-bottom:20px;">
+            <div style="text-align: center; border-top: 1px solid #5d4037; padding-top: 1rem;">
+                <div style="font-size: 0.9rem; color: #a1887f;">Current Ratio (B:G)</div>
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res">2:1</span></div>
+                <p id="verdict" style="color: #ffb74d;">Add more browns!</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const g = parseFloat(document.getElementById('g').value) || 1;
+            const b = parseFloat(document.getElementById('b').value) || 0;
+            const r = b / g;
+            document.getElementById('res').textContent = r.toFixed(1) + ":1";
+            let v = "Perfect mix! (Aim for 3:1)";
+            if(r < 2.5) v = "Too soggy! Add more browns (Carbon).";
+            else if(r > 4) v = "Too dry! Add more greens (Nitrogen).";
+            document.getElementById('verdict').textContent = v;
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

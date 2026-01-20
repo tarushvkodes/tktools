@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SalaryPro | Reverse Income Calc</title>
+    <style>
+        body { background: #2f3640; color: white; font-family: sans-serif; padding: 2rem; }
+        .card { background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; max-width: 500px; margin: auto; }
+        input { width: 100%; padding: 10px; margin: 10px 0 20px; border-radius: 5px; border: 1px solid #444; background: #111; color: #00ff41; font-size: 1.2rem; }
+        .res { font-size: 2rem; font-weight: bold; color: #fbc531; text-align: center; }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" style="color: #aaa;">← Back</a>
+    <div class="card">
+        <h1>SalaryPro 💰</h1>
+        <p>I want to earn (Net Annual):</p>
+        <input type="number" id="target" value="60000">
+        <label>Estimated Tax Rate (%)</label>
+        <input type="number" id="tax" value="25">
+        <div style="border-top: 1px solid #444; padding-top: 1rem;">
+            <div>Required Gross Annual:</div>
+            <div class="res" id="gross">$80,000</div>
+            <div style="margin-top: 1rem;">Required Hourly (2080 hrs):</div>
+            <div class="res" id="hourly">$38.46</div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const target = parseFloat(document.getElementById('target').value) || 0;
+            const tax = parseFloat(document.getElementById('tax').value) || 0;
+            const gross = target / (1 - (tax / 100));
+            document.getElementById('gross').textContent = "$" + Math.round(gross).toLocaleString();
+            document.getElementById('hourly').textContent = "$" + (gross / 2080).toFixed(2);
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

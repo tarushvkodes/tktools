@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaundryLoad | Detergent Cost</title>
+</head>
+<body style="background: #00cec9; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>LaundryLoad 🧺🧼</h1>
+        <div style="background: rgba(255,255,255,0.2); padding: 2rem; border-radius: 12px;">
+            <label>Bottle Price ($)</label><input type="number" id="p" value="12" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Loads Per Bottle</label><input type="number" id="l" value="64" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Loads Per Week</label><input type="number" id="w" value="5" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="background: white; color: #00cec9; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 2rem; font-weight: bold;">$<span id="res">0.19</span></div>
+                <div>Cost Per Load</div>
+                <div style="margin-top: 10px;">$<span id="res-m">3.80</span> Per Month</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const p = parseFloat(document.getElementById('p').value) || 0;
+            const l = parseFloat(document.getElementById('l').value) || 1;
+            const w = parseFloat(document.getElementById('w').value) || 0;
+            const cpl = p / l;
+            document.getElementById('res').textContent = cpl.toFixed(2);
+            document.getElementById('res-m').textContent = (cpl * w * 4.3).toFixed(2);
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

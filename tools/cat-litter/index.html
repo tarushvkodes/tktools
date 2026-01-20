@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CatLitter | Bag Duration Calc</title>
+</head>
+<body style="background: #a29bfe; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>CatLitter 🐈‍⬛📦</h1>
+        <div style="background: rgba(0,0,0,0.1); padding: 2rem; border-radius: 12px;">
+            <label>Bag Weight (lb)</label><input type="number" id="w" value="20" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Number of Cats</label><input type="number" id="c" value="1" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="background: white; color: #6c5ce7; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 0.9rem;">Estimated Duration</div>
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res">30</span> Days</div>
+                <p style="font-size: 0.8rem; margin-top: 10px;">*Assumes average usage of ~0.6 lb per cat per day.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const w = parseFloat(document.getElementById('w').value) || 0;
+            const c = parseFloat(document.getElementById('c').value) || 1;
+            const days = w / (c * 0.65);
+            document.getElementById('res').textContent = Math.round(days);
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

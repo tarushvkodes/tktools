@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OneRepMax | Strength Estimator</title>
+</head>
+<body style="background: #d63031; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>OneRepMax 🏋️‍♂️💯</h1>
+        <div style="background: rgba(0,0,0,0.2); padding: 2rem; border-radius: 12px;">
+            <label>Weight Lifted (kg/lb)</label><input type="number" id="w" value="100" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Reps Performed (1-10)</label><input type="number" id="r" value="5" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="background: white; color: #d63031; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 0.9rem;">Estimated 1RM</div>
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res">115</span></div>
+                <p style="font-size: 0.8rem; margin-top: 10px;">*Uses Epley's formula: W * (1 + R/30).</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const w = parseFloat(document.getElementById('w').value) || 0;
+            const r = parseFloat(document.getElementById('r').value) || 1;
+            const orm = w * (1 + r / 30);
+            document.getElementById('res').textContent = Math.round(orm);
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

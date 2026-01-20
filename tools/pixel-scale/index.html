@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelScale | Pixel Art Resolution Calculator</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="app-container">
+        <header class="app-header">
+            <a href="../../index.html" class="back-link">← TKTools</a>
+            <h1>PixelScale</h1>
+            <p>Perfect integer scaling and print resolution for pixel art.</p>
+        </header>
+
+        <main class="calc-grid">
+            <!-- Integer Scaler -->
+            <section class="glass-panel tool-panel">
+                <div class="panel-header">
+                    <div class="icon">👾</div>
+                    <h2>Integer Scaler</h2>
+                </div>
+                <p class="desc">Scale up without distortion (nearest-neighbor safe).</p>
+                
+                <div class="row">
+                    <div class="input-group">
+                        <label>Sprite Width</label>
+                        <input type="number" id="sprite-w" value="64">
+                    </div>
+                    <div class="input-group">
+                        <label>Sprite Height</label>
+                        <input type="number" id="sprite-h" value="64">
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label>Target Container (e.g., 1080p)</label>
+                    <select id="target-res">
+                        <option value="1920,1080">1920 x 1080 (FHD)</option>
+                        <option value="1080,1080">1080 x 1080 (Insta)</option>
+                        <option value="3840,2160">3840 x 2160 (4K)</option>
+                        <option value="1280,720">1280 x 720 (HD)</option>
+                        <option value="custom">Custom...</option>
+                    </select>
+                </div>
+
+                <div class="row hidden" id="custom-res-group">
+                    <div class="input-group">
+                        <label>Target W</label>
+                        <input type="number" id="target-w" value="1920">
+                    </div>
+                    <div class="input-group">
+                        <label>Target H</label>
+                        <input type="number" id="target-h" value="1080">
+                    </div>
+                </div>
+
+                <div class="result-display">
+                    <span class="label">Max Integer Scale</span>
+                    <span class="value" id="res-scale">16x</span>
+                    <span class="sub-value" id="res-final-dim">Final Size: 1024 x 1024</span>
+                    <div class="border-info" id="res-border">Borders: 448px (W) / 28px (H)</div>
+                </div>
+            </section>
+
+            <!-- Print Calculator -->
+            <section class="glass-panel tool-panel">
+                <div class="panel-header">
+                    <div class="icon">🖨️</div>
+                    <h2>Print Size (DPI)</h2>
+                </div>
+                <p class="desc">Required canvas size for physical prints.</p>
+
+                <div class="input-group">
+                    <label>Desired Physical Height (inches)</label>
+                    <input type="number" id="print-h" value="5">
+                </div>
+                
+                <div class="input-group">
+                    <label>Aspect Ratio</label>
+                    <select id="aspect-ratio">
+                        <option value="1.777777">16:9</option>
+                        <option value="1.333333">4:3</option>
+                        <option value="1">1:1 (Square)</option>
+                        <option value="1.414">A4/A3 (ISO)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Target DPI</label>
+                    <input type="number" id="dpi" value="300">
+                </div>
+
+                <div class="result-display highlight">
+                    <span class="label">Canvas Pixels</span>
+                    <span class="value" id="res-canvas-px">2667 x 1500</span>
+                    <span class="sub-value" id="res-phys-w">Physical Width: 8.89 in</span>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlueGuide | Adhesive Selector</title>
+    <style>
+        body { background: #fdfafd; color: #333; font-family: sans-serif; padding: 2rem; }
+        .app { max-width: 600px; margin: auto; text-align: center; }
+        select { width: 100%; padding: 15px; font-size: 1.1rem; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 1rem; }
+        .res { background: #ff7675; color: white; padding: 2rem; border-radius: 15px; font-size: 1.5rem; font-weight: bold; margin-top: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html">← Back</a>
+        <h1>GlueGuide 🧪🛠️</h1>
+        <p>What are you gluing together?</p>
+        <select id="m1">
+            <option value="wood">Wood</option>
+            <option value="metal">Metal</option>
+            <option value="plastic">Plastic</option>
+            <option value="glass">Glass</option>
+            <option value="ceramic">Ceramic</option>
+        </select>
+        <p>to</p>
+        <select id="m2">
+            <option value="wood">Wood</option>
+            <option value="metal">Metal</option>
+            <option value="plastic">Plastic</option>
+            <option value="glass">Glass</option>
+            <option value="ceramic">Ceramic</option>
+        </select>
+        <div class="res" id="out">PVA (Wood Glue)</div>
+    </div>
+    <script>
+        const logic = {
+            'wood-wood': 'PVA (Wood Glue)',
+            'wood-metal': 'Epoxy or Construction Adhesive',
+            'metal-metal': 'Epoxy or Cyanoacrylate (Super Glue)',
+            'plastic-plastic': 'Specialty Plastic Cement',
+            'glass-glass': 'Clear Silicone or UV Glue',
+            'default': 'Two-Part Epoxy'
+        };
+        function update() {
+            const key = document.getElementById('m1').value + '-' + document.getElementById('m2').value;
+            const rev = document.getElementById('m2').value + '-' + document.getElementById('m1').value;
+            document.getElementById('out').textContent = logic[key] || logic[rev] || logic['default'];
+        }
+        document.querySelectorAll('select').forEach(s => s.addEventListener('change', update));
+    </script>
+</body>
+</html>

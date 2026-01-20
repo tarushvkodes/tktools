@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GiftWrap | Paper Size Calc</title>
+</head>
+<body style="background: #c0392b; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>GiftWrap 🎁</h1>
+        <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px;">
+            <label>Box Length (cm)</label><input type="number" id="l" value="20" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Box Width (cm)</label><input type="number" id="w" value="15" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Box Height (cm)</label><input type="number" id="h" value="10" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="background: white; color: #c0392b; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 0.9rem;">Minimum Paper Needed</div>
+                <div style="font-size: 2rem; font-weight: bold;"><span id="res">65 x 40</span> cm</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const l = parseFloat(document.getElementById('l').value) || 0;
+            const w = parseFloat(document.getElementById('w').value) || 0;
+            const h = parseFloat(document.getElementById('h').value) || 0;
+            // Paper Width = 2*L + 2*H (plus overlap)
+            // Paper Height = W + 2*H (plus overlap)
+            const pW = (2 * l) + (2 * h) + 5;
+            const pH = w + (1.5 * h); // Flap logic
+            document.getElementById('res').textContent = Math.ceil(pW) + " x " + Math.ceil(pH);
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CandleScent | Fragrance Load Calc</title>
+</head>
+<body style="background: #f8c291; color: #6a89cc; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #6a89cc;">← Back</a>
+        <h1>CandleScent 🕯️</h1>
+        <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <label>Total Wax Weight (g)</label>
+            <input type="number" id="w" value="200" style="width:100%; padding:10px; margin-bottom:20px;">
+            <label>Fragrance Load (%)</label>
+            <input type="number" id="l" value="8" style="width:100%; padding:10px; margin-bottom:20px;">
+            <div style="background: #6a89cc; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 2rem; font-weight: bold;"><span id="res">16</span>g</div>
+                <div>Fragrance Oil Needed</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const w = parseFloat(document.getElementById('w').value) || 0;
+            const l = parseFloat(document.getElementById('l').value) || 0;
+            document.getElementById('res').textContent = (w * (l / 100)).toFixed(1);
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+    </script>
+</body>
+</html>

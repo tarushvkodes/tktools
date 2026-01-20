@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DripLeak | Waste Calculator</title>
+</head>
+<body style="background: #00cec9; color: #2d3436; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>DripLeak 💧📉</h1>
+        <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <label>Drips Per Minute</label><input type="number" id="d" value="30" style="width:100%; padding:10px; margin-bottom:20px;">
+            <div style="background: #0984e3; color: white; padding: 2rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 0.9rem;">Total Annual Waste</div>
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res">1576</span> Gallons</div>
+                <p style="font-size: 0.8rem; margin-top: 10px;">Enough to fill ~4000 standard water bottles.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const d = parseFloat(document.getElementById('d').value) || 0;
+            // 1 gallon is approx 15,000 drips
+            const gallonsPerDay = (d * 1440) / 15000;
+            document.getElementById('res').textContent = Math.round(gallonsPerDay * 365);
+        }
+        document.getElementById('d').addEventListener('input', update);
+        update();
+    </script>
+</body>
+</html>

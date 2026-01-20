@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DashLights | Car Symbols</title>
+    <style>
+        body { background: #1a1a1a; color: #eee; font-family: sans-serif; padding: 2rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 2rem; }
+        .card { background: #2d2d2d; padding: 1rem; border-radius: 10px; text-align: center; border-bottom: 4px solid #555; }
+        .icon { font-size: 2rem; margin-bottom: 5px; }
+        .red { border-color: #e74c3c; color: #e74c3c; }
+        .yel { border-color: #f1c40f; color: #f1c40f; }
+    </style>
+</head>
+<body>
+    <div style="max-width: 800px; margin: auto;">
+        <a href="../../index.html" style="color: #888;">← Back</a>
+        <h1>DashLights 🚗⚠️</h1>
+        <p>Common dashboard warning light meanings.</p>
+        <div class="grid">
+            <div class="card red"><div class="icon">🌡️</div><strong>Overheating</strong><p style="font-size:0.7rem;">Stop safely now.</p></div>
+            <div class="card red"><div class="icon">🛢️</div><strong>Oil Pressure</strong><p style="font-size:0.7rem;">Low oil or pump fail.</p></div>
+            <div class="card yel"><div class="icon">⚙️</div><strong>Check Engine</strong><p style="font-size:0.7rem;">Service required soon.</p></div>
+            <div class="card yel"><div class="icon">⭕</div><strong>ABS System</strong><p style="font-size:0.7rem;">Brake assist issue.</p></div>
+            <div class="card yel"><div class="icon">💨</div><strong>Tire Pressure</strong><p style="font-size:0.7rem;">Check PSI levels.</p></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScreenDistance | Optimal Viewing Calc</title>
+</head>
+<body style="background: #2d3436; color: #fdcb6e; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #636e72;">← Back</a>
+        <h1>ScreenDistance 📺</h1>
+        <div style="background: #333; padding: 2rem; border-radius: 12px; border: 1px solid #444;">
+            <label>Screen Size (Diagonal Inches)</label>
+            <input type="number" id="s" value="55" style="width:100%; padding:10px; margin-bottom:20px; background: #222; color: #fdcb6e; border: 1px solid #555;">
+            <label>Resolution</label>
+            <select id="r" style="width:100%; padding:10px; background: #222; color: #fdcb6e;">
+                <option value="1.5">4K (Ultra HD)</option>
+                <option value="2.5">1080p (Full HD)</option>
+            </select>
+            <div style="text-align: center; margin-top: 2rem;">
+                <div style="font-size: 0.9rem; color: #aaa;">Optimal Distance</div>
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res">1.7</span> Meters</div>
+                <div id="feet" style="color: #636e72;">5.6 Feet</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const s = parseFloat(document.getElementById('s').value) || 0;
+            const r = parseFloat(document.getElementById('r').value);
+            const meters = (s * r * 0.0254);
+            document.getElementById('res').textContent = meters.toFixed(1);
+            document.getElementById('feet').textContent = (meters * 3.28084).toFixed(1) + " Feet";
+        }
+        document.querySelectorAll('input, select').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

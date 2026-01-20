@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HydroCount | Water Tracker</title>
+    <style>
+        body { background: #e0f2fe; color: #0369a1; font-family: sans-serif; padding: 2rem; text-align: center; }
+        .app { max-width: 400px; margin: auto; }
+        .glass-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 2rem 0; }
+        .glass { width: 60px; height: 80px; border: 3px solid #0369a1; border-top: none; border-radius: 0 0 10px 10px; cursor: pointer; position: relative; overflow: hidden; }
+        .water { position: absolute; bottom: 0; left: 0; width: 100%; height: 0; background: #38bdf8; transition: height 0.3s; }
+        .glass.full .water { height: 100%; }
+        button { background: #0369a1; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html" style="color: #0369a1;">← Back</a>
+        <h1>HydroCount 💧🥛</h1>
+        <p>Goal: 8 Glasses a Day</p>
+        <div class="glass-container" id="grid">
+            <!-- 8 Glasses -->
+        </div>
+        <button onclick="reset()">RESET DAILY</button>
+    </div>
+    <script>
+        function render() {
+            const count = parseInt(localStorage.getItem('tk-hydro') || '0');
+            let html = "";
+            for(let i=0; i<8; i++) {
+                html += `<div class="glass ${i < count ? 'full' : ''}" onclick="inc(${i})"><div class="water"></div></div>`;
+            }
+            document.getElementById('grid').innerHTML = html;
+        }
+        function inc(i) {
+            localStorage.setItem('tk-hydro', i + 1);
+            render();
+        }
+        function reset() { localStorage.setItem('tk-hydro', 0); render(); }
+        render();
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RestInterval | Gym Timer</title>
+</head>
+<body style="background: #2d3436; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+        <a href="../../index.html" style="color: #636e72;">← Back</a>
+        <h1>RestInterval ⏱️💪</h1>
+        <div style="font-size: 5rem; font-weight: bold; margin: 2rem 0;" id="t">01:30</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div onclick="start(60)" style="background: #00b894; padding: 1rem; border-radius: 8px; cursor: pointer;">60s (Hypertrophy)</div>
+            <div onclick="start(180)" style="background: #0984e3; padding: 1rem; border-radius: 8px; cursor: pointer;">180s (Strength)</div>
+        </div>
+        <div onclick="stop()" style="margin-top: 1rem; color: #d63031; cursor: pointer;">STOP</div>
+    </div>
+    <script>
+        let timer, seconds = 0;
+        function start(s) {
+            clearInterval(timer); seconds = s; update();
+            timer = setInterval(() => {
+                seconds--; update();
+                if(seconds <= 0) { clearInterval(timer); alert("Rest over! Get to work!"); }
+            }, 1000);
+        }
+        function stop() { clearInterval(timer); seconds = 0; update(); }
+        function update() {
+            const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const s = (seconds % 60).toString().padStart(2, '0');
+            document.getElementById('t').textContent = `${m}:${s}`;
+        }
+    </script>
+</body>
+</html>

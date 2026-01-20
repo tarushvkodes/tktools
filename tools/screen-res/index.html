@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScreenRes | PPI Calculator</title>
+</head>
+<body style="background: #000; color: #0f0; font-family: monospace; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #080;">← Back</a>
+        <h1>ScreenRes_PPI_CALC</h1>
+        <div style="border: 1px solid #0f0; padding: 2rem; background: rgba(0,255,0,0.05);">
+            <label>Width (Pixels)</label><input type="number" id="w" value="1920" style="width:100%; padding:10px; margin-bottom:15px; background: #000; border: 1px solid #0f0; color: #0f0;">
+            <label>Height (Pixels)</label><input type="number" id="h" value="1080" style="width:100%; padding:10px; margin-bottom:15px; background: #000; border: 1px solid #0f0; color: #0f0;">
+            <label>Diagonal (Inches)</label><input type="number" id="d" value="24" style="width:100%; padding:10px; margin-bottom:15px; background: #000; border: 1px solid #0f0; color: #0f0;">
+            <div style="font-size: 3rem; text-align: center; border-top: 1px solid #0f0; padding-top: 1rem;">
+                <span id="res">91.8</span> PPI
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const w = parseFloat(document.getElementById('w').value) || 0;
+            const h = parseFloat(document.getElementById('h').value) || 0;
+            const d = parseFloat(document.getElementById('d').value) || 1;
+            const diagPx = Math.sqrt(Math.pow(w, 2) + Math.pow(h, 2));
+            document.getElementById('res').textContent = (diagPx / d).toFixed(1);
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

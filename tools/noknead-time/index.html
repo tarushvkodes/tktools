@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoKneadTime | Bread Schedule Calculator</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        .app-container { max-width: 600px; margin: 0 auto; padding: 2rem; }
+        .timeline { border-left: 2px solid #e17055; padding-left: 20px; margin-top: 2rem; }
+        .event { margin-bottom: 1.5rem; position: relative; }
+        .event::before { content: ''; width: 12px; height: 12px; background: #e17055; border-radius: 50%; position: absolute; left: -27px; top: 5px; }
+        .time { font-weight: bold; color: #fab1a0; }
+        input { padding: 10px; border-radius: 5px; border: 1px solid #444; background: #222; color: white; width: 100%; margin-top: 5px; }
+        .glass-panel { padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 12px; }
+    </style>
+</head>
+<body style="background: #2d3436; color: white; font-family: sans-serif;">
+    <div class="app-container">
+        <a href="../../index.html" style="color: #aaa; text-decoration: none;">← Back</a>
+        <h1>NoKneadTime</h1>
+        <p>When to start your dough to bake at a specific time.</p>
+
+        <div class="glass-panel">
+            <label>I want my bread ready by:</label>
+            <input type="datetime-local" id="target-time">
+            
+            <div style="margin-top: 1rem; display: flex; gap: 10px;">
+                <div style="flex:1">
+                    <label>Bulk Ferment (hrs)</label>
+                    <input type="number" id="ferment-hrs" value="18">
+                </div>
+                <div style="flex:1">
+                    <label>Proofing (hrs)</label>
+                    <input type="number" id="proof-hrs" value="2">
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline" id="timeline">
+            <!-- Events injected here -->
+        </div>
+    </div>
+    <script>
+        const targetInput = document.getElementById('target-time');
+        const fermentInput = document.getElementById('ferment-hrs');
+        const proofInput = document.getElementById('proof-hrs');
+        const timeline = document.getElementById('timeline');
+
+        // Set default to tomorrow 10am
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        tomorrow.setHours(10, 0, 0, 0);
+        targetInput.value = new Date(tomorrow.getTime() - tomorrow.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+
+        function update() {
+            const target = new Date(targetInput.value);
+            const ferment = parseFloat(fermentInput.value) || 0;
+            const proof = parseFloat(proofInput.value) || 0;
+            const bakeTime = 1; // 1 hour for baking/cooling
+
+            const proofStart = new Date(target.getTime() - (bakeTime + proof) * 3600000);
+            const fermentStart = new Date(proofStart.getTime() - ferment * 3600000);
+
+            const options = { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+
+            timeline.innerHTML = `
+                <div class="event">
+                    <div class="time">${fermentStart.toLocaleDateString('en-US', options)}</div>
+                    <div><strong>Mix Dough:</strong> Combine flour, water, yeast, salt. Cover and leave.</div>
+                </div>
+                <div class="event">
+                    <div class="time">${proofStart.toLocaleDateString('en-US', options)}</div>
+                    <div><strong>Shape & Proof:</strong> Fold dough, place in basket for final rise. Preheat oven.</div>
+                </div>
+                <div class="event">
+                    <div class="time">${new Date(target.getTime() - 3600000).toLocaleDateString('en-US', options)}</div>
+                    <div><strong>Bake:</strong> Move dough to dutch oven.</div>
+                </div>
+                <div class="event">
+                    <div class="time">${target.toLocaleDateString('en-US', options)}</div>
+                    <div><strong>Ready to Eat:</strong> Bread is cooled and ready!</div>
+                </div>
+            `;
+        }
+
+        [targetInput, fermentInput, proofInput].forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

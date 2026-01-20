@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EncounterScaler | D&D Difficulty Adjuster</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        body { background: #1a1a1a; color: #eee; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .app-container { max-width: 600px; margin: 0 auto; padding: 2rem; }
+        .card { background: #2d2d2d; border: 1px solid #444; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; }
+        .row { display: flex; gap: 10px; margin-top: 10px; }
+        input { background: #111; border: 1px solid #555; color: #fff; padding: 8px; border-radius: 4px; width: 100%; }
+        .result { background: #574b90; color: white; padding: 1.5rem; border-radius: 12px; text-align: center; }
+        .big { font-size: 2rem; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <a href="../../index.html" style="color: #888; text-decoration: none;">← Back</a>
+        <h1 style="color: #9b59b6;">EncounterScaler</h1>
+        <p>Adjust monster HP/Quantity when you have too many (or too few) players.</p>
+
+        <div class="card">
+            <h3>Standard Encounter</h3>
+            <label>Designed for # Players:</label>
+            <input type="number" id="orig-p" value="4">
+            <label>Total Monster HP in Design:</label>
+            <input type="number" id="orig-hp" value="100">
+        </div>
+
+        <div class="card">
+            <h3>Your Actual Party</h3>
+            <label>Actual # Players:</label>
+            <input type="number" id="new-p" value="6">
+        </div>
+
+        <div class="result">
+            <div style="text-transform: uppercase; font-size: 0.8rem;">Adjusted Challenge</div>
+            <div class="big" id="res-hp">150 HP</div>
+            <p id="res-desc">Increase HP by 50% to maintain relative difficulty.</p>
+        </div>
+        
+        <div style="margin-top: 1rem; font-size: 0.8rem; color: #888;">
+            *Uses linear action economy scaling. For 6+ players, consider adding legendary actions instead of just HP.
+        </div>
+    </div>
+    <script>
+        function update() {
+            const op = parseFloat(document.getElementById('orig-p').value) || 1;
+            const ohp = parseFloat(document.getElementById('orig-hp').value) || 0;
+            const np = parseFloat(document.getElementById('new-p').value) || 1;
+
+            const ratio = np / op;
+            const newHp = ohp * ratio;
+
+            document.getElementById('res-hp').textContent = Math.round(newHp) + " HP";
+            const percent = Math.round((ratio - 1) * 100);
+            document.getElementById('res-desc').textContent = percent >= 0 
+                ? `Increase HP/Quantity by ${percent}%`
+                : `Decrease HP/Quantity by ${Math.abs(percent)}%`;
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+    </script>
+</body>
+</html>

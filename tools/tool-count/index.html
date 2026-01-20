@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolCount | Milestone</title>
+</head>
+<body style="background: #000; color: #0f0; font-family: monospace; display: flex; align-items: center; justify-content: center; height: 100vh; text-align: center; overflow: hidden;">
+    <div>
+        <h1 style="font-size: 5rem; margin: 0;">200</h1>
+        <p style="font-size: 1.5rem;">UNIQUE TOOLS COMPLETED</p>
+        <a href="../../index.html" style="color: #0f0; text-decoration: none; border: 1px solid #0f0; padding: 10px 20px; border-radius: 5px; display: inline-block; margin-top: 2rem;">RETURN TO DASHBOARD</a>
+    </div>
+    <script>
+        // Matrix effect background
+        const canvas = document.createElement('canvas');
+        document.body.appendChild(canvas);
+        canvas.style.position = 'fixed'; canvas.style.top = '0'; canvas.style.left = '0'; canvas.style.zIndex = '-1';
+        const ctx = canvas.getContext('2d');
+        let w = canvas.width = window.innerWidth;
+        let h = canvas.height = window.innerHeight;
+        const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const drops = new Array(Math.floor(w/20)).fill(1);
+        function draw() {
+            ctx.fillStyle = "rgba(0,0,0,0.05)"; ctx.fillRect(0,0,w,h);
+            ctx.fillStyle = "#0f0"; ctx.font = "15px monospace";
+            drops.forEach((y, i) => {
+                const char = chars[Math.floor(Math.random()*chars.length)];
+                ctx.fillText(char, i*20, y*20);
+                if(y*20 > h && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            });
+        }
+        setInterval(draw, 33);
+    </script>
+</body>
+</html>

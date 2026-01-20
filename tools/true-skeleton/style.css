@@ -1,0 +1,175 @@
+/* Layout Reuses some TrueGlass structures but modified */
+.app-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.controls-panel {
+    width: 320px;
+    height: 100%;
+    padding: 2rem;
+    border-right: 1px solid var(--glass-border);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: rgba(15, 20, 30, 0.8);
+    overflow-y: auto;
+}
+
+.canvas-area {
+    flex: 1;
+    background: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.skeleton-canvas {
+    width: 500px;
+    height: 600px;
+    background: #ffffff;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    /* Elements clipped to canvas */
+}
+
+/* Controls */
+.button-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.tool-btn {
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.tool-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+}
+
+input[type="range"] {
+    width: 100%;
+}
+
+input[type="color"] {
+    width: 100%;
+    height: 35px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.primary-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.secondary-btn {
+    width: 100%;
+    padding: 0.8rem;
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.instruction-text {
+    margin-top: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+#copy-feedback {
+    text-align: center;
+    color: #4cd964;
+    opacity: 0;
+    transition: 0.3s;
+    height: 20px;
+}
+
+#copy-feedback.visible {
+    opacity: 1;
+}
+
+/* The Skeleton Element on Canvas */
+.skeleton-item {
+    position: absolute;
+    background-color: #ddd;
+    /* Fallback */
+    cursor: move;
+    /* Shimmer Effect */
+    overflow: hidden;
+}
+
+/* Selected state for resizing */
+.skeleton-item.selected {
+    outline: 2px solid var(--accent-color);
+}
+
+/* Resize Handle (simplified: just bottom-right) */
+.resize-handle {
+    width: 10px;
+    height: 10px;
+    background: var(--accent-color);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: nwse-resize;
+    display: none;
+}
+
+.skeleton-item.selected .resize-handle {
+    display: block;
+}
+
+/* PREVIEW ANIMATION STYLES */
+/* This is injected dynamically by JS, but base structure is here */
+.shimmer {
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: shimmer;
+    animation-timing-function: linear;
+    background: linear-gradient(to right, var(--base) 8%, var(--highlight) 18%, var(--base) 33%);
+    background-size: 1200px 100%;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1200px 0;
+    }
+
+    100% {
+        background-position: 1200px 0;
+    }
+}
+
+/* Dark mode for canvas? No, standard skeleton is usually on white/light bg.
+   But we let user choose base color so it works for dark mode too. */

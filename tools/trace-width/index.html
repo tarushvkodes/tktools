@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TraceWidth | PCB Trace Width Calc</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        body { background: #001f11; color: #00ff41; font-family: 'Courier New', Courier, monospace; }
+        .app-container { max-width: 600px; margin: 0 auto; padding: 2rem; }
+        .panel { border: 1px solid #00ff41; padding: 1.5rem; background: rgba(0,255,65,0.05); }
+        input, select { background: #000; border: 1px solid #00ff41; color: #00ff41; padding: 10px; width: 100%; margin: 5px 0 15px; }
+        .result { font-size: 2rem; border-top: 1px solid #00ff41; padding-top: 1rem; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <a href="../../index.html" style="color: #00ff41; text-decoration: none;">← BACK_TO_DASHBOARD</a>
+        <h1>PCB_TRACE_WIDTH_CALC</h1>
+        
+        <div class="panel">
+            <label>CURRENT (Amps)</label>
+            <input type="number" id="amp" value="1" step="0.1">
+
+            <label>TEMP_RISE (°C)</label>
+            <input type="number" id="temp" value="10">
+
+            <label>COPPER_THICKNESS (oz/ft²)</label>
+            <select id="thick">
+                <option value="1">1 oz/ft² (Standard)</option>
+                <option value="2">2 oz/ft²</option>
+                <option value="0.5">0.5 oz/ft²</option>
+            </select>
+
+            <label>LAYER_LOCATION</label>
+            <select id="loc">
+                <option value="ext">External Layer</option>
+                <option value="int">Internal Layer</option>
+            </select>
+
+            <div class="result">
+                <span id="res-width">0.31</span> mm
+                <div style="font-size: 0.8rem;">REQUIRED_WIDTH</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const I = parseFloat(document.getElementById('amp').value);
+            const dT = parseFloat(document.getElementById('temp').value);
+            const oz = parseFloat(document.getElementById('thick').value);
+            const loc = document.getElementById('loc').value;
+
+            // IPC-2221 formula: I = k * dT^b * Area^c
+            // Area = (I / (k * dT^b))^(1/c)
+            let k, b, c;
+            if (loc === 'ext') { k = 0.048; b = 0.44; c = 0.725; } 
+            else { k = 0.024; b = 0.44; c = 0.725; }
+
+            const area = Math.pow(I / (k * Math.pow(dT, b)), 1/c); // in sq mils
+            const thickMil = oz * 1.37; // 1oz is approx 1.37 mils
+            const widthMil = area / thickMil;
+            const widthMm = widthMil * 0.0254;
+
+            document.getElementById('res-width').textContent = widthMm.toFixed(2);
+        }
+        document.querySelectorAll('input, select').forEach(i => i.addEventListener('change', update));
+        update();
+    </script>
+</body>
+</html>

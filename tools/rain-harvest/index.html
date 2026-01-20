@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RainHarvest | Collection Estimator</title>
+</head>
+<body style="background: #0077be; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>RainHarvest 🌧️🛢️</h1>
+        <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px;">
+            <label>Roof Footprint (sq ft)</label><input type="number" id="a" value="1000" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Rainfall (inches)</label><input type="number" id="r" value="1" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="background: white; color: #0077be; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res">623</span> Gallons</div>
+                <div>Potential Harvest</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const a = parseFloat(document.getElementById('a').value) || 0;
+            const r = parseFloat(document.getElementById('r').value) || 0;
+            // 1 sq ft * 1 inch rain = 0.623 gallons
+            document.getElementById('res').textContent = Math.round(a * r * 0.623);
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

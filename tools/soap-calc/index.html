@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoapCalc | Simple Saponification</title>
+</head>
+<body style="background: #a29bfe; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>SoapCalc 🧼</h1>
+        <div style="background: rgba(255,255,255,0.2); padding: 2rem; border-radius: 12px;">
+            <label>Oil Weight (g)</label>
+            <input type="number" id="o" value="500" style="width:100%; padding:10px; margin-bottom:20px;">
+            <label>Oil Type</label>
+            <select id="t" style="width:100%; padding:10px; margin-bottom:20px;">
+                <option value="0.135">Olive Oil</option>
+                <option value="0.190">Coconut Oil</option>
+                <option value="0.141">Palm Oil</option>
+            </select>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; text-align: center;">
+                <div style="background: white; color: #333; padding: 1rem; border-radius: 8px;">
+                    <div style="font-size: 1.5rem; font-weight: bold;" id="res-lye">67.5g</div>
+                    <div>Lye (NaOH)</div>
+                </div>
+                <div style="background: white; color: #333; padding: 1rem; border-radius: 8px;">
+                    <div style="font-size: 1.5rem; font-weight: bold;" id="res-water">165g</div>
+                    <div>Water</div>
+                </div>
+            </div>
+            <p style="font-size: 0.7rem; margin-top: 1rem;">*5% Superfat included. Always double check with detailed SAP tables.</p>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const o = parseFloat(document.getElementById('o').value) || 0;
+            const sap = parseFloat(document.getElementById('t').value);
+            const lye = (o * sap) * 0.95; // 5% superfat
+            const water = lye * 2.5; // Standard water ratio
+            document.getElementById('res-lye').textContent = lye.toFixed(1) + "g";
+            document.getElementById('res-water').textContent = water.toFixed(1) + "g";
+        }
+        document.querySelectorAll('input, select').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

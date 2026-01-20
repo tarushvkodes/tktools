@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeskHeight | Ergonomic Calculator</title>
+</head>
+<body style="background: #dfe6e9; color: #2d3436; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html">← Back</a>
+        <h1>DeskHeight 🪑</h1>
+        <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            <label>Your Height (cm)</label>
+            <input type="number" id="h" value="175" style="width:100%; padding:10px; margin-bottom:20px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: bold;" id="res-desk">72</div>
+                    <div>Desk Height (cm)</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: bold;" id="res-chair">45</div>
+                    <div>Chair Height (cm)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const h = parseFloat(document.getElementById('h').value) || 0;
+            document.getElementById('res-desk').textContent = Math.round(h * 0.41);
+            document.getElementById('res-chair').textContent = Math.round(h * 0.26);
+        }
+        document.getElementById('h').addEventListener('input', update);
+        update();
+    </script>
+</body>
+</html>

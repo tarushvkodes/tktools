@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SubSaver | Subscription ROI</title>
+</head>
+<body style="background: #222; color: #eee; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #aaa;">← Back</a>
+        <h1>SubSaver 📉</h1>
+        <p>Is that monthly subscription actually worth it?</p>
+        <div style="background: #333; padding: 2rem; border-radius: 12px;">
+            <label>Monthly Cost ($)</label>
+            <input type="number" id="cost" value="15" style="width:100%; padding:10px; margin-bottom:20px;">
+            <label>Hours Used Per Month</label>
+            <input type="number" id="hours" value="5" style="width:100%; padding:10px; margin-bottom:20px;">
+            <div style="text-align: center; border-top: 1px solid #444; padding-top: 1rem;">
+                <div style="font-size: 0.9rem; color: #aaa;">Cost Per Hour of Joy</div>
+                <div style="font-size: 3rem; font-weight: bold; color: #2ecc71;">$<span id="res-ph">3.00</span></div>
+                <p id="verdict">Reasonable entertainment value.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const c = parseFloat(document.getElementById('cost').value) || 0;
+            const h = parseFloat(document.getElementById('hours').value) || 0;
+            const ph = h > 0 ? c / h : c;
+            document.getElementById('res-ph').textContent = ph.toFixed(2);
+            let v = "Expensive!";
+            if(ph < 1) v = "Great Value!";
+            else if(ph < 5) v = "Reasonable.";
+            document.getElementById('verdict').textContent = v;
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+    </script>
+</body>
+</html>

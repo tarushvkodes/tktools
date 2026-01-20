@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypingSpeed | WPM Tester</title>
+</head>
+<body style="background: #2d3436; color: white; font-family: monospace; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+        <a href="../../index.html" style="color: #636e72;">← Back</a>
+        <h1>TypingSpeed ⌨️⚡</h1>
+        <p style="color: #aaa;">"The quick brown fox jumps over the lazy dog."</p>
+        <textarea id="t" style="width: 100%; height: 100px; padding: 10px; background: #111; border: 1px solid #444; color: #00ff41; font-size: 1.2rem;" placeholder="Start typing above sentence..."></textarea>
+        <div style="font-size: 4rem; font-weight: bold; margin-top: 1rem;"><span id="res">0</span> WPM</div>
+    </div>
+    <script>
+        let start;
+        document.getElementById('t').addEventListener('input', (e) => {
+            if(!start) start = Date.now();
+            const elapsed = (Date.now() - start) / 60000;
+            const words = e.target.value.length / 5;
+            document.getElementById('res').textContent = Math.round(words / elapsed);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorldClock | Global Time</title>
+    <style>
+        body { background: #2f3640; color: white; font-family: sans-serif; padding: 2rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .clock { background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; text-align: center; }
+        .time { font-size: 2rem; font-weight: bold; margin-top: 10px; color: #fbc531; }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" style="color: #aaa;">← Back</a>
+    <h1>WorldClock 🌎🕒</h1>
+    <div class="grid">
+        <div class="clock"><div>New York</div><div class="time" id="ny">00:00</div></div>
+        <div class="clock"><div>London</div><div class="time" id="lon">00:00</div></div>
+        <div class="clock"><div>Tokyo</div><div class="time" id="tok">00:00</div></div>
+        <div class="clock"><div>Sydney</div><div class="time" id="syd">00:00</div></div>
+    </div>
+    <script>
+        function update() {
+            const opts = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            document.getElementById('ny').textContent = new Date().toLocaleTimeString('en-US', { ...opts, timeZone: 'America/New_York' });
+            document.getElementById('lon').textContent = new Date().toLocaleTimeString('en-US', { ...opts, timeZone: 'Europe/London' });
+            document.getElementById('tok').textContent = new Date().toLocaleTimeString('en-US', { ...opts, timeZone: 'Asia/Tokyo' });
+            document.getElementById('syd').textContent = new Date().toLocaleTimeString('en-US', { ...opts, timeZone: 'Australia/Sydney' });
+        }
+        setInterval(update, 1000); update();
+    </script>
+</body>
+</html>

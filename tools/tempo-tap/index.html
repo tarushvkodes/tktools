@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TempoTap | BPM Tapper</title>
+</head>
+<body style="background: #121212; color: white; font-family: sans-serif; text-align: center; padding-top: 5rem;">
+    <a href="../../index.html" style="color: #555; text-decoration: none;">← Back</a>
+    <h1>TempoTap 🥁</h1>
+    <div id="tap-area" style="width: 250px; height: 250px; border-radius: 50%; background: #e91e63; margin: 2rem auto; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.5rem; user-select: none;">
+        TAP HERE
+    </div>
+    <div style="font-size: 4rem; font-weight: bold;" id="res">0</div>
+    <div style="color: #555;">BPM (Average of last 4 taps)</div>
+    <script>
+        let taps = [];
+        document.getElementById('tap-area').addEventListener('mousedown', (e) => {
+            const now = performance.now();
+            taps.push(now);
+            if(taps.length > 4) taps.shift();
+            if(taps.length > 1) {
+                const diffs = [];
+                for(let i=1; i<taps.length; i++) diffs.push(taps[i] - taps[i-1]);
+                const avg = diffs.reduce((a,b) => a+b) / diffs.length;
+                document.getElementById('res').textContent = Math.round(60000 / avg);
+            }
+            e.target.style.transform = 'scale(0.95)';
+            setTimeout(() => e.target.style.transform = 'scale(1)', 50);
+        });
+    </script>
+</body>
+</html>

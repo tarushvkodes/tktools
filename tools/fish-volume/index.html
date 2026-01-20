@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FishVolume | Aquarium Capacity Calc</title>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body style="background: #006266; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #55efc4; text-decoration: none;">← Back</a>
+        <h1>FishVolume 🐟</h1>
+        <div class="glass-panel" style="padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 20px;">
+            <label>Tank Shape</label>
+            <select id="shape" style="width: 100%; padding: 10px; margin-bottom: 20px;">
+                <option value="rect">Rectangular</option>
+                <option value="cyl">Cylinder</option>
+                <option value="bow">Bowfront (Approx)</option>
+            </select>
+            <div id="dim-rect">
+                <label>Length (cm)</label><input type="number" id="l" value="60" style="width:100%; padding:10px; margin-bottom:10px;">
+                <label>Width (cm)</label><input type="number" id="w" value="30" style="width:100%; padding:10px; margin-bottom:10px;">
+                <label>Height (cm)</label><input type="number" id="h" value="30" style="width:100%; padding:10px; margin-bottom:10px;">
+            </div>
+            <div id="dim-cyl" style="display:none">
+                <label>Diameter (cm)</label><input type="number" id="d" value="30" style="width:100%; padding:10px; margin-bottom:10px;">
+                <label>Height (cm)</label><input type="number" id="ch" value="60" style="width:100%; padding:10px; margin-bottom:10px;">
+            </div>
+            <div style="background: #1289A7; padding: 2rem; border-radius: 15px; text-align: center; margin-top: 1rem;">
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res-l">54</span> L</div>
+                <div id="res-gal">14.3 US Gallons</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const shape = document.getElementById('shape');
+        const dr = document.getElementById('dim-rect');
+        const dc = document.getElementById('dim-cyl');
+        function update() {
+            let liters = 0;
+            if(shape.value === 'rect' || shape.value === 'bow') {
+                dr.style.display = 'block'; dc.style.display = 'none';
+                liters = (parseFloat(document.getElementById('l').value) * parseFloat(document.getElementById('w').value) * parseFloat(document.getElementById('h').value)) / 1000;
+                if(shape.value === 'bow') liters *= 1.15; // Rough bowfront factor
+            } else {
+                dr.style.display = 'none'; dc.style.display = 'block';
+                const r = parseFloat(document.getElementById('d').value) / 2;
+                liters = (Math.PI * r * r * parseFloat(document.getElementById('ch').value)) / 1000;
+            }
+            document.getElementById('res-l').textContent = Math.round(liters);
+            document.getElementById('res-gal').textContent = (liters * 0.264172).toFixed(1) + " US Gallons";
+        }
+        document.querySelectorAll('input, select').forEach(i => i.addEventListener('input', update));
+        shape.addEventListener('change', update);
+    </script>
+</body>
+</html>

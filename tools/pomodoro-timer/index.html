@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro | Focus Timer</title>
+</head>
+<body style="background: #e74c3c; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>Pomodoro 🍅⏱️</h1>
+        <div style="font-size: 6rem; font-weight: bold; margin: 2rem 0;" id="time">25:00</div>
+        <div style="display: flex; justify-content: center; gap: 10px;">
+            <div id="btn" style="background: white; color: #e74c3c; padding: 1rem 2rem; border-radius: 30px; cursor: pointer; font-weight: bold;">START</div>
+            <div id="reset" style="background: rgba(255,255,255,0.2); padding: 1rem 2rem; border-radius: 30px; cursor: pointer;">RESET</div>
+        </div>
+    </div>
+    <script>
+        let timer, seconds = 1500, isRunning = false;
+        function update() {
+            const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const s = (seconds % 60).toString().padStart(2, '0');
+            document.getElementById('time').textContent = `${m}:${s}`;
+        }
+        document.getElementById('btn').addEventListener('click', () => {
+            if(isRunning) {
+                clearInterval(timer); isRunning = false;
+                document.getElementById('btn').textContent = "START";
+            } else {
+                isRunning = true; document.getElementById('btn').textContent = "STOP";
+                timer = setInterval(() => {
+                    seconds--; update();
+                    if(seconds <= 0) { clearInterval(timer); alert("Time's up!"); isRunning = false; }
+                }, 1000);
+            }
+        });
+        document.getElementById('reset').addEventListener('click', () => {
+            clearInterval(timer); isRunning = false; seconds = 1500; update();
+            document.getElementById('btn').textContent = "START";
+        });
+    </script>
+</body>
+</html>

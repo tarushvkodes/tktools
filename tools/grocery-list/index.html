@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GroceryList | Kitchen Helper</title>
+    <style>
+        body { background: #fdfafd; color: #333; font-family: sans-serif; padding: 2rem; }
+        .app { max-width: 500px; margin: auto; }
+        .row { display: flex; gap: 10px; margin-bottom: 1rem; }
+        input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        button { background: #2ecc71; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+        .item { display: flex; align-items: center; gap: 10px; padding: 10px; border-bottom: 1px solid #eee; }
+        .item span { flex: 1; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html">← Back</a>
+        <h1>GroceryList 🛒🍎</h1>
+        <div class="row">
+            <input type="text" id="i" placeholder="Add item (e.g. Milk)...">
+            <button onclick="add()">ADD</button>
+        </div>
+        <div id="list"></div>
+    </div>
+    <script>
+        function render() {
+            const items = JSON.parse(localStorage.getItem('tk-groceries') || '[]');
+            document.getElementById('list').innerHTML = items.map((x, i) => `
+                <div class="item">
+                    <input type="checkbox">
+                    <span>${x}</span>
+                    <button onclick="del(${i})" style="background:transparent; color:#ccc;">X</button>
+                </div>
+            `).join('');
+        }
+        function add() {
+            const i = document.getElementById('i').value;
+            if(!i) return;
+            const items = JSON.parse(localStorage.getItem('tk-groceries') || '[]');
+            items.push(i);
+            localStorage.setItem('tk-groceries', JSON.stringify(items));
+            document.getElementById('i').value = '';
+            render();
+        }
+        function del(i) {
+            const items = JSON.parse(localStorage.getItem('tk-groceries') || '[]');
+            items.splice(i, 1);
+            localStorage.setItem('tk-groceries', JSON.stringify(items));
+            render();
+        }
+        render();
+    </script>
+</body>
+</html>

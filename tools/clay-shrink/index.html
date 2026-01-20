@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClayScale | Pottery Shrinkage Calculator</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="app-container">
+        <header class="app-header">
+            <a href="../../index.html" class="back-link">← TKTools</a>
+            <h1>ClayScale</h1>
+            <p>Master your clay shrinkage rates for perfect sizing.</p>
+        </header>
+
+        <main class="calc-grid">
+            <!-- Card 1: Find Shrinkage % -->
+            <section class="glass-panel tool-panel">
+                <div class="panel-header">
+                    <div class="icon">📏</div>
+                    <h2>Find Shrinkage %</h2>
+                </div>
+                <p class="desc">Measure a test tile before and after firing.</p>
+                
+                <div class="input-group">
+                    <label>Wet Size (cm/in)</label>
+                    <input type="number" id="wet-size" placeholder="10.0">
+                </div>
+                
+                <div class="input-group">
+                    <label>Fired Size (cm/in)</label>
+                    <input type="number" id="fired-size" placeholder="8.8">
+                </div>
+
+                <div class="result-display">
+                    <span class="label">Shrinkage Rate</span>
+                    <span class="value" id="res-percent">0.0%</span>
+                </div>
+            </section>
+
+            <!-- Card 2: Find Target Wet Size -->
+            <section class="glass-panel tool-panel">
+                <div class="panel-header">
+                    <div class="icon">🎯</div>
+                    <h2>Target Wet Size</h2>
+                </div>
+                <p class="desc">How big to throw to get a specific final size?</p>
+
+                <div class="input-group">
+                    <label>Desired Final Size (cm/in)</label>
+                    <input type="number" id="target-size" placeholder="12.0">
+                </div>
+
+                <div class="input-group">
+                    <label>Known Shrinkage (%)</label>
+                    <input type="number" id="shrinkage-rate" placeholder="12.0">
+                </div>
+
+                <div class="result-display highlight">
+                    <span class="label">Throw At</span>
+                    <span class="value" id="res-throw">0.0</span>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

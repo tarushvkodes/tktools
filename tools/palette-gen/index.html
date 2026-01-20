@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PaletteGen | Random Schemes</title>
+    <style>
+        body { background: #fdfafd; color: #333; font-family: sans-serif; padding: 2rem; text-align: center; }
+        .grid { display: flex; height: 300px; border-radius: 20px; overflow: hidden; margin: 2rem auto; max-width: 800px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .swatch { flex: 1; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 1rem; color: rgba(0,0,0,0.5); font-weight: bold; font-family: monospace; cursor: pointer; transition: flex 0.3s; }
+        .swatch:hover { flex: 1.5; color: rgba(0,0,0,0.8); }
+        button { background: #007aff; color: white; border: none; padding: 1rem 2rem; border-radius: 30px; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" style="color: #888;">← Back</a>
+    <h1>PaletteGen 🎨✨</h1>
+    <div class="grid" id="g"></div>
+    <button onclick="gen()">GENERATE PALETTE</button>
+    <p>Click a color to copy Hex.</p>
+    <script>
+        function gen() {
+            const g = document.getElementById('g');
+            g.innerHTML = "";
+            for(let i=0; i<5; i++) {
+                const hex = "#" + Math.random().toString(16).slice(2, 8).padEnd(6, '0');
+                const s = document.createElement('div');
+                s.className = 'swatch';
+                s.style.background = hex;
+                s.textContent = hex.toUpperCase();
+                s.onclick = () => { navigator.clipboard.writeText(hex); alert("Copied " + hex); };
+                g.appendChild(s);
+            }
+        }
+        gen();
+    </script>
+</body>
+</html>

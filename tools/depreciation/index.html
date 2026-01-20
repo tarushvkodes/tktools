@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depreciation | Future Value</title>
+</head>
+<body style="background: #2d3436; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #636e72;">← Back</a>
+        <h1>Depreciation 📉🚙</h1>
+        <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px;">
+            <label>Purchase Price ($)</label><input type="number" id="p" value="30000" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Years Owned</label><input type="number" id="y" value="5" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Vehicle Type</label>
+            <select id="t" style="width:100%; padding:10px; margin-bottom:15px;">
+                <option value="0.15">Standard Sedan (15%/yr)</option>
+                <option value="0.10">Luxury / Truck (10%/yr)</option>
+                <option value="0.25">EV / High-Tech (25%/yr)</option>
+            </select>
+            <div style="background: #d63031; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 0.9rem;">Estimated Future Value</div>
+                <div style="font-size: 3rem; font-weight: bold;">$<span id="res">13311</span></div>
+                <p id="lost" style="font-size: 0.8rem; margin-top: 10px;">You've lost $16689 in value.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const p = parseFloat(document.getElementById('p').value) || 0;
+            const y = parseInt(document.getElementById('y').value) || 0;
+            const rate = parseFloat(document.getElementById('t').value);
+            const future = p * Math.pow(1 - rate, y);
+            document.getElementById('res').textContent = Math.round(future);
+            document.getElementById('lost').textContent = `You've lost $${Math.round(p - future)} in value.`;
+        }
+        document.querySelectorAll('input, select').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DecisionSpin | Random Choice</title>
+    <style>
+        body { background: #2d3436; color: white; font-family: sans-serif; text-align: center; padding: 2rem; }
+        .wheel { width: 300px; height: 300px; border: 10px solid white; border-radius: 50%; margin: 2rem auto; position: relative; transition: transform 3s cubic-bezier(0.15, 0, 0.15, 1); background: conic-gradient(#ff7675 0% 25%, #74b9ff 25% 50%, #55efc4 50% 75%, #ffeaa7 75% 100%); }
+        .pointer { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 30px solid white; z-index: 10; }
+        button { background: #ff7675; color: white; border: none; padding: 1rem 2rem; border-radius: 30px; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" style="color: #636e72;">← Back</a>
+    <h1>DecisionSpin 🎡❓</h1>
+    <p>Can't decide? Let the wheel pick.</p>
+    <div style="position:relative; display:inline-block;">
+        <div class="pointer"></div>
+        <div class="wheel" id="w"></div>
+    </div>
+    <br>
+    <button onclick="spin()">SPIN THE WHEEL</button>
+    <h2 id="res" style="margin-top: 2rem;">...</h2>
+    <script>
+        let deg = 0;
+        function spin() {
+            deg += 1000 + Math.random() * 1000;
+            document.getElementById('w').style.transform = `rotate(${deg}deg)`;
+            setTimeout(() => {
+                const choices = ["Red (Option 1)", "Blue (Option 2)", "Green (Option 3)", "Yellow (Option 4)"];
+                const index = Math.floor(((deg % 360) / 360) * 4);
+                document.getElementById('res').textContent = choices[3 - index];
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PomoCustom | Flexible Timer</title>
+    <style>
+        body { background: #450a0a; color: #fecaca; font-family: sans-serif; padding: 2rem; text-align: center; }
+        .app { max-width: 500px; margin: auto; }
+        .time { font-size: 6rem; font-weight: bold; margin: 2rem 0; }
+        .btns { display: flex; justify-content: center; gap: 10px; }
+        button { padding: 1rem 2rem; border-radius: 30px; border: none; font-weight: bold; cursor: pointer; }
+        .start { background: #ef4444; color: white; }
+        .reset { background: rgba(255,255,255,0.1); color: white; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html" style="color: #991b1b;">← Back</a>
+        <h1>PomoCustom 🍅⏳</h1>
+        <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem;">
+            <div onclick="set(25)" style="cursor:pointer; opacity:0.8;">25m</div>
+            <div onclick="set(5)" style="cursor:pointer; opacity:0.8;">5m</div>
+            <div onclick="set(15)" style="cursor:pointer; opacity:0.8;">15m</div>
+        </div>
+        <div class="time" id="t">25:00</div>
+        <div class="btns">
+            <button class="start" id="b" onclick="toggle()">START</button>
+            <button class="reset" onclick="reset()">RESET</button>
+        </div>
+    </div>
+    <script>
+        let s = 1500, timer, running = false;
+        function update() {
+            const m = Math.floor(s/60).toString().padStart(2, '0');
+            const sec = (s%60).toString().padStart(2, '0');
+            document.getElementById('t').textContent = `${m}:${sec}`;
+        }
+        function toggle() {
+            if(running) { clearInterval(timer); running = false; document.getElementById('b').textContent = "START"; }
+            else { 
+                running = true; document.getElementById('b').textContent = "STOP";
+                timer = setInterval(() => { s--; update(); if(s<=0){ clearInterval(timer); alert("Done!"); } }, 1000);
+            }
+        }
+        function reset() { clearInterval(timer); running = false; s = 1500; update(); document.getElementById('b').textContent = "START"; }
+        function set(m) { clearInterval(timer); running = false; s = m * 60; update(); document.getElementById('b').textContent = "START"; }
+    </script>
+</body>
+</html>

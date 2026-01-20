@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NpcGen | Random Traits</title>
+    <style>
+        body { background: #2d3436; color: white; font-family: serif; padding: 2rem; }
+        .app { max-width: 600px; margin: auto; text-align: center; }
+        .card { background: #1e272e; padding: 2rem; border-radius: 15px; border: 2px solid #fdcb6e; margin: 2rem 0; }
+        .trait { margin-bottom: 1rem; }
+        .label { color: #fdcb6e; font-size: 0.8rem; text-transform: uppercase; }
+        .val { font-size: 1.5rem; font-weight: bold; }
+        button { background: #fdcb6e; color: #2d3436; border: none; padding: 1rem 2rem; font-size: 1.2rem; font-weight: bold; border-radius: 8px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html" style="color: #636e72;">← Back</a>
+        <h1>NpcGen 🎭👥</h1>
+        <div class="card">
+            <div class="trait"><div class="label">Name</div><div class="val" id="name">Bofur</div></div>
+            <div class="trait"><div class="label">Vocal Quirk</div><div class="val" id="voice">Speaks very slowly</div></div>
+            <div class="trait"><div class="label">Physical Trait</div><div class="val" id="body">Wears a bright red hat</div></div>
+            <div class="trait"><div class="label">Secret/Goal</div><div class="val" id="secret">Owes money to a pirate</div></div>
+        </div>
+        <button onclick="gen()">GENERATE NPC</button>
+    </div>
+    <script>
+        const names = ["Alden", "Bofur", "Cassia", "Dax", "Elora", "Finn", "Grom", "Hilda", "Ira", "Jace"];
+        const voices = ["High pitched and squeaky", "Deep and gravelly", "Whispers everything", "Speaks very slowly", "Accents the wrong syllables", "Never makes eye contact"];
+        const bodies = ["Wears a bright red hat", "Has a missing finger", "Covered in tattoos", "Limps slightly", "Smells like lavender", "Carries a pet rat"];
+        const secrets = ["Owes money to a pirate", "Is a secret royal", "Actually a doppleganger", "Looking for a lost cat", "Afraid of the dark", "Knows a hidden entrance"];
+        
+        function gen() {
+            document.getElementById('name').textContent = names[Math.floor(Math.random()*names.length)];
+            document.getElementById('voice').textContent = voices[Math.floor(Math.random()*voices.length)];
+            document.getElementById('body').textContent = bodies[Math.floor(Math.random()*bodies.length)];
+            document.getElementById('secret').textContent = secrets[Math.floor(Math.random()*secrets.length)];
+        }
+        gen();
+    </script>
+</body>
+</html>

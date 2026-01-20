@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StatRoller | RPG Character Gen</title>
+</head>
+<body style="background: #1a1a1a; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+        <a href="../../index.html" style="color: #888;">← Back</a>
+        <h1>StatRoller 🎲⚔️</h1>
+        <div id="btn" style="background: #9b59b6; padding: 1rem; border-radius: 12px; cursor: pointer; font-weight: bold; margin-bottom: 2rem;">ROLL 4d6 DROP LOWEST</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+            <div style="background: #333; padding: 1rem; border-radius: 8px;"><div style="font-size: 0.8rem; color: #aaa;">STR</div><div style="font-size: 2rem; font-weight: bold;" class="stat">10</div></div>
+            <div style="background: #333; padding: 1rem; border-radius: 8px;"><div style="font-size: 0.8rem; color: #aaa;">DEX</div><div style="font-size: 2rem; font-weight: bold;" class="stat">10</div></div>
+            <div style="background: #333; padding: 1rem; border-radius: 8px;"><div style="font-size: 0.8rem; color: #aaa;">CON</div><div style="font-size: 2rem; font-weight: bold;" class="stat">10</div></div>
+            <div style="background: #333; padding: 1rem; border-radius: 8px;"><div style="font-size: 0.8rem; color: #aaa;">INT</div><div style="font-size: 2rem; font-weight: bold;" class="stat">10</div></div>
+            <div style="background: #333; padding: 1rem; border-radius: 8px;"><div style="font-size: 0.8rem; color: #aaa;">WIS</div><div style="font-size: 2rem; font-weight: bold;" class="stat">10</div></div>
+            <div style="background: #333; padding: 1rem; border-radius: 8px;"><div style="font-size: 0.8rem; color: #aaa;">CHA</div><div style="font-size: 2rem; font-weight: bold;" class="stat">10</div></div>
+        </div>
+        <div style="margin-top: 2rem; font-size: 1.5rem;">Total: <span id="tot">60</span></div>
+    </div>
+    <script>
+        function roll() {
+            let totalSum = 0;
+            document.querySelectorAll('.stat').forEach(el => {
+                let dice = [];
+                for(let i=0; i<4; i++) dice.push(Math.floor(Math.random() * 6) + 1);
+                dice.sort().shift(); // Drop lowest
+                const sum = dice.reduce((a,b) => a+b);
+                el.textContent = sum;
+                totalSum += sum;
+            });
+            document.getElementById('tot').textContent = totalSum;
+        }
+        document.getElementById('btn').addEventListener('click', roll);
+        roll();
+    </script>
+</body>
+</html>

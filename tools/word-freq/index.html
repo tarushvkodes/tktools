@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordFreq | Text Analysis</title>
+    <style>
+        body { background: #fdfafd; color: #333; font-family: sans-serif; padding: 2rem; }
+        .app { max-width: 800px; margin: auto; }
+        textarea { width: 100%; height: 200px; padding: 1rem; border: 1px solid #ddd; border-radius: 10px; font-size: 1rem; margin-bottom: 1rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+        .row { background: white; padding: 10px; border-radius: 5px; display: flex; justify-content: space-between; border: 1px solid #eee; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html">← Back</a>
+        <h1>WordFreq 📊🔤</h1>
+        <textarea id="in" placeholder="Paste text here to analyze word frequency..."></textarea>
+        <div class="grid" id="out"></div>
+    </div>
+    <script>
+        document.getElementById('in').addEventListener('input', (e) => {
+            const words = e.target.value.toLowerCase().match(/\b(\w+)\b/g);
+            if(!words) return;
+            const freq = {};
+            words.forEach(w => freq[w] = (freq[w] || 0) + 1);
+            const sorted = Object.entries(freq).sort((a,b) => b[1] - a[1]).slice(0, 20);
+            document.getElementById('out').innerHTML = sorted.map(([w, c]) => `
+                <div class="row"><span>${w}</span><strong>${c}</strong></div>
+            `).join('');
+        });
+    </script>
+</body>
+</html>

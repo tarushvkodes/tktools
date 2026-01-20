@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GradeNeed | Final Exam Calculator</title>
+</head>
+<body style="background: #2980b9; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>GradeNeed 🎓</h1>
+        <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px;">
+            <label>Current Grade (%)</label><input type="number" id="cg" value="85" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Target Grade (%)</label><input type="number" id="tg" value="90" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Final Exam Weight (%)</label><input type="number" id="fw" value="25" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="background: white; color: #2980b9; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 0.9rem;">You Need to Score</div>
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res">105</span>%</div>
+                <p id="msg" style="font-size: 0.8rem; margin-top: 5px;">Time to start studying!</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const cg = parseFloat(document.getElementById('cg').value) || 0;
+            const tg = parseFloat(document.getElementById('tg').value) || 0;
+            const fw = parseFloat(document.getElementById('fw').value) || 1;
+            const fwD = fw / 100;
+            const cwD = 1 - fwD;
+            // tg = (cg * cwD) + (final * fwD)
+            // final = (tg - (cg * cwD)) / fwD
+            const score = (tg - (cg * cwW)) / fwD;
+            // Wait, CW is (1 - FW/100)
+            const cw = 100 - fw;
+            const final = (tg * 100 - cg * cw) / fw;
+            document.getElementById('res').textContent = Math.ceil(final);
+            document.getElementById('msg').textContent = final > 100 ? "Might be impossible!" : (final > 90 ? "You can do it!" : "Should be easy!");
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TileCalc | Floor Estimator</title>
+</head>
+<body style="background: #95a5a6; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>TileCalc 🧱</h1>
+        <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px;">
+            <label>Room Area (sq ft)</label><input type="number" id="a" value="100" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Tile Size (inches)</label>
+            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                <input type="number" id="tw" value="12" style="width:100%; padding:10px;">
+                <span>x</span>
+                <input type="number" id="th" value="12" style="width:100%; padding:10px;">
+            </div>
+            <label>Overage / Waste (%)</label><input type="number" id="o" value="10" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="background: white; color: #7f8c8d; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res">110</span> Tiles</div>
+                <div>Estimated Total Need</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const a = parseFloat(document.getElementById('a').value) || 0;
+            const tw = parseFloat(document.getElementById('tw').value) || 1;
+            const th = parseFloat(document.getElementById('th').value) || 1;
+            const o = parseFloat(document.getElementById('o').value) || 0;
+            const tileArea = (tw * th) / 144;
+            const count = a / tileArea;
+            const total = count * (1 + o/100);
+            document.getElementById('res').textContent = Math.ceil(total);
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

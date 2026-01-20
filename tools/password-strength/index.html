@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PasswordStrength | Security Estimator</title>
+</head>
+<body style="background: #1e272e; color: white; font-family: monospace; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #485460;">← Back</a>
+        <h1>PasswordStrength 🔐</h1>
+        <div style="background: #000; padding: 2rem; border-radius: 12px; border: 1px solid #485460;">
+            <input type="text" id="p" placeholder="Type a password..." style="width:100%; padding:15px; background: #111; border: 1px solid #555; color: #00ff41; font-size: 1.2rem;">
+            <div id="bar" style="height: 10px; background: #555; margin-top: 1rem; border-radius: 5px; overflow: hidden;">
+                <div id="fill" style="height: 100%; width: 0%; transition: width 0.3s, background 0.3s;"></div>
+            </div>
+            <div style="margin-top: 2rem;">
+                <div>Crack Time: <span id="time" style="color: #00ff41;">Instant</span></div>
+                <div>Entropy: <span id="ent">0</span> bits</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const p = document.getElementById('p').value;
+            let pool = 0;
+            if(/[a-z]/.test(p)) pool += 26;
+            if(/[A-Z]/.test(p)) pool += 26;
+            if(/[0-9]/.test(p)) pool += 10;
+            if(/[^a-zA-Z0-9]/.test(p)) pool += 32;
+            
+            const entropy = p.length > 0 ? Math.log2(Math.pow(pool, p.length)) : 0;
+            document.getElementById('ent').textContent = Math.round(entropy);
+            
+            const fill = document.getElementById('fill');
+            let color = "#ff4757";
+            if(entropy > 40) color = "#ffa502";
+            if(entropy > 60) color = "#2ed573";
+            if(entropy > 80) color = "#1e90ff";
+            fill.style.width = Math.min(100, (entropy/100)*100) + "%";
+            fill.style.background = color;
+
+            let time = "Instant";
+            if(entropy > 30) time = "Hours";
+            if(entropy > 50) time = "Years";
+            if(entropy > 80) time = "Centuries";
+            document.getElementById('time').textContent = p.length > 0 ? time : "Instant";
+        }
+        document.getElementById('p').addEventListener('input', update);
+    </script>
+</body>
+</html>

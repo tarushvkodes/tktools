@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HydrateGoal | Personal Water Intake Calc</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        body { background: #0fbcf9; color: white; font-family: sans-serif; }
+        .app-container { max-width: 600px; margin: 0 auto; padding: 2rem; }
+        .glass { background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); padding: 2rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.3); }
+        input { width: 100%; padding: 15px; margin: 10px 0 20px; border-radius: 10px; border: none; font-size: 1.2rem; }
+        .result { font-size: 3rem; font-weight: bold; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <a href="../../index.html" style="color: white; text-decoration: none;">← Back</a>
+        <h1>HydrateGoal 💧</h1>
+        <p>Calculate your daily water needs based on weight and activity.</p>
+
+        <div class="glass">
+            <label>Weight (kg)</label>
+            <input type="number" id="weight" value="70">
+            
+            <label>Daily Exercise (minutes)</label>
+            <input type="number" id="exercise" value="30">
+
+            <div class="result">
+                <span id="res-l">2.5</span> L
+                <div style="font-size: 1rem; font-weight: normal; opacity: 0.8;">DAILY_GOAL</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const w = parseFloat(document.getElementById('weight').value) || 0;
+            const e = parseFloat(document.getElementById('exercise').value) || 0;
+
+            // Base: 35ml per kg of body weight
+            // Plus: 500ml per 60 mins of exercise
+            const base = w * 0.035;
+            const extra = (e / 60) * 0.5;
+            const total = base + extra;
+
+            document.getElementById('res-l').textContent = total.toFixed(1);
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

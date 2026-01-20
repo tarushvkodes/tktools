@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvoiceGen | Freelance Template</title>
+    <style>
+        body { background: #f5f6fa; font-family: sans-serif; padding: 20px; color: #2f3640; }
+        .invoice-box { max-width: 800px; margin: auto; padding: 30px; border: 1px solid #eee; background: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }
+        .invoice-box table { width: 100%; line-height: inherit; text-align: left; border-collapse: collapse; }
+        .invoice-box table td { padding: 5px; vertical-align: top; }
+        .invoice-box table tr.heading td { background: #eee; border-bottom: 1px solid #ddd; font-weight: bold; }
+        .invoice-box table tr.item td { border-bottom: 1px solid #eee; }
+        .invoice-box table tr.total td:nth-child(2) { border-top: 2px solid #eee; font-weight: bold; }
+        input { border: 1px dashed #ccc; padding: 5px; width: 100%; box-sizing: border-box; }
+        .print-btn { background: #0097e6; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
+        @media print { .print-btn, .back-link { display: none; } input { border: none; } }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" class="back-link">← Back</a>
+    <button class="print-btn" onclick="window.print()">Print / Save PDF</button>
+    <div class="invoice-box" id="invoice">
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td style="font-size: 45px; color: #333;">INVOICE</td>
+                            <td style="text-align: right;">
+                                Invoice #: <input type="text" value="1001" style="width: 100px; text-align: right;"><br>
+                                Created: <input type="text" id="date" style="width: 100px; text-align: right;"><br>
+                                Due: <input type="text" value="30 Days" style="width: 100px; text-align: right;">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="information">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td>
+                                <strong>From:</strong><br>
+                                <input type="text" placeholder="Your Name/Company"><br>
+                                <input type="text" placeholder="Address/Email">
+                            </td>
+                            <td style="text-align: right;">
+                                <strong>To:</strong><br>
+                                <input type="text" placeholder="Client Name"><br>
+                                <input type="text" placeholder="Client Details">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="heading">
+                <td>Item</td>
+                <td style="text-align: right;">Price</td>
+            </tr>
+            <tr class="item">
+                <td><input type="text" value="Web Design Services"></td>
+                <td style="text-align: right;"><input type="text" value="$1,000.00" style="text-align: right;"></td>
+            </tr>
+            <tr class="item">
+                <td><input type="text" value="Hosting (Annual)"></td>
+                <td style="text-align: right;"><input type="text" value="$150.00" style="text-align: right;"></td>
+            </tr>
+            <tr class="total">
+                <td></td>
+                <td style="text-align: right;">Total: <input type="text" value="$1,150.00" style="width: 100px; text-align: right;"></td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        document.getElementById('date').value = new Date().toLocaleDateString();
+    </script>
+</body>
+</html>

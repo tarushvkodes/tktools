@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlantThirst | Watering Schedule</title>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body style="background: #1b8d27; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #fff; text-decoration: none;">← Back</a>
+        <h1>PlantThirst 🌿</h1>
+        <div class="glass-panel" style="padding: 2rem; background: rgba(0,0,0,0.2); border-radius: 20px;">
+            <label>Plant Type</label>
+            <select id="type" style="width:100%; padding:10px; margin-bottom:20px;">
+                <option value="1">Succulent / Cactus</option>
+                <option value="2">Tropical (Monstera, etc)</option>
+                <option value="3">Thirsty (Fern, etc)</option>
+            </select>
+            <label>Pot Material</label>
+            <select id="pot" style="width:100%; padding:10px; margin-bottom:20px;">
+                <option value="0.7">Terracotta (Dry)</option>
+                <option value="1">Plastic / Glazed</option>
+            </select>
+            <label>Light Level</label>
+            <select id="light" style="width:100%; padding:10px; margin-bottom:20px;">
+                <option value="0.5">Low Light</option>
+                <option value="1" selected>Bright Indirect</option>
+                <option value="1.5">Direct Sun</option>
+            </select>
+            <div style="background: rgba(255,255,255,0.2); padding: 2rem; border-radius: 15px; text-align: center;">
+                <div style="font-size: 1.2rem;">Water Every</div>
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res-days">7</span> Days</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const base = [21, 7, 3][parseInt(document.getElementById('type').value)-1];
+            const pot = parseFloat(document.getElementById('pot').value);
+            const light = parseFloat(document.getElementById('light').value);
+            const days = (base * pot) / light;
+            document.getElementById('res-days').textContent = Math.round(days);
+        }
+        document.querySelectorAll('select').forEach(s => s.addEventListener('change', update));
+    </script>
+</body>
+</html>

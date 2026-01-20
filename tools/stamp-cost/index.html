@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StampCost | Mail Estimator</title>
+</head>
+<body style="background: #34495e; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #7f8c8d;">← Back</a>
+        <h1>StampCost ✉️📮</h1>
+        <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px;">
+            <label>Weight (oz)</label><input type="number" id="w" value="1" step="0.1" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Mail Type</label>
+            <select id="t" style="width:100%; padding:10px; margin-bottom:20px;">
+                <option value="0.68">Standard Letter</option>
+                <option value="1.50">Large Envelope / Flat</option>
+            </select>
+            <div style="background: white; color: #2c3e50; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 0.9rem;">Total Postage</div>
+                <div style="font-size: 3rem; font-weight: bold;">$<span id="res">0.68</span></div>
+                <p style="font-size: 0.8rem; margin-top: 10px;">Approx. <span id="stamps">1</span> Forever Stamps</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const w = Math.ceil(parseFloat(document.getElementById('w').value) || 1);
+            const t = parseFloat(document.getElementById('t').value);
+            const extra = (w - 1) * 0.24; // Extra ounce price
+            const total = t + Math.max(0, extra);
+            document.getElementById('res').textContent = total.toFixed(2);
+            document.getElementById('stamps').textContent = Math.ceil(total / 0.68);
+        }
+        document.querySelectorAll('input, select').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

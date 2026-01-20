@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BatteryLife | Runtime Calc</title>
+</head>
+<body style="background: #e74c3c; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #fff;">← Back</a>
+        <h1>BatteryLife 🔋</h1>
+        <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px;">
+            <label>Battery Capacity (mAh)</label><input type="number" id="c" value="3000" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Device Consumption (mA)</label><input type="number" id="d" value="200" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="background: white; color: #c0392b; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 2rem; font-weight: bold;"><span id="res">10.5</span> Hours</div>
+                <div>Estimated Runtime</div>
+                <p style="font-size: 0.8rem; margin-top: 5px;">*Includes 30% safety discharge factor.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const c = parseFloat(document.getElementById('c').value) || 0;
+            const d = parseFloat(document.getElementById('d').value) || 1;
+            const hours = (c / d) * 0.7; // 70% efficiency/discharge
+            document.getElementById('res').textContent = hours.toFixed(1);
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

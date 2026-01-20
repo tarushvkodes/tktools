@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HabitGrid | 30-Day Tracker</title>
+    <style>
+        body { background: #f1f2f6; color: #2f3542; font-family: sans-serif; padding: 2rem; text-align: center; }
+        .grid { display: grid; grid-template-columns: repeat(7, 40px); gap: 10px; justify-content: center; margin: 2rem auto; }
+        .day { width: 40px; height: 40px; background: white; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; line-height: 40px; font-size: 0.8rem; }
+        .day.done { background: #2ed573; color: white; border-color: #2ed573; }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" style="color: #747d8c;">← Back</a>
+    <h1>HabitGrid ✅📅</h1>
+    <p>Don't break the chain!</p>
+    <div class="grid" id="g"></div>
+    <button onclick="localStorage.removeItem('tk-chain'); render();" style="margin-top: 2rem; background: #e84118; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">RESET CHAIN</button>
+    <script>
+        function render() {
+            const done = JSON.parse(localStorage.getItem('tk-chain') || '[]');
+            let html = "";
+            for(let i=1; i<=30; i++) {
+                const isDone = done.includes(i);
+                html += `<div class="day ${isDone ? 'done' : ''}" onclick="toggle(${i})">${i}</div>`;
+            }
+            document.getElementById('g').innerHTML = html;
+        }
+        function toggle(i) {
+            let done = JSON.parse(localStorage.getItem('tk-chain') || '[]');
+            if(done.includes(i)) done = done.filter(x => x !== i);
+            else done.push(i);
+            localStorage.setItem('tk-chain', JSON.stringify(done));
+            render();
+        }
+        render();
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BpmTapper | Rhythm Finder</title>
+    <style>
+        body { background: #121212; color: white; font-family: sans-serif; text-align: center; padding-top: 5rem; }
+        .tap-area { width: 200px; height: 200px; border-radius: 50%; background: #00b894; margin: 2rem auto; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; cursor: pointer; user-select: none; box-shadow: 0 0 20px rgba(0,184,148,0.3); }
+        .bpm { font-size: 5rem; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" style="color: #555;">← Back</a>
+    <h1>BpmTapper 🥁⏱️</h1>
+    <div class="tap-area" id="tap" onmousedown="tap()">TAP</div>
+    <div class="bpm" id="res">0</div>
+    <p style="color: #555;">Average of last 4 taps.</p>
+    <script>
+        let times = [];
+        function tap() {
+            const now = performance.now();
+            times.push(now);
+            if(times.length > 4) times.shift();
+            if(times.length > 1) {
+                const diffs = [];
+                for(let i=1; i<times.length; i++) diffs.push(times[i] - times[i-1]);
+                const avg = diffs.reduce((a,b) => a+b) / diffs.length;
+                document.getElementById('res').textContent = Math.round(60000 / avg);
+            }
+            const t = document.getElementById('tap');
+            t.style.transform = "scale(0.95)";
+            setTimeout(() => t.style.transform = "scale(1)", 50);
+        }
+    </script>
+</body>
+</html>

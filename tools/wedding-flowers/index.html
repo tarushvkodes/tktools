@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeddingFlowers | Stem Estimator</title>
+</head>
+<body style="background: #fff5f5; color: #ff8e8e; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #ff8e8e;">← Back</a>
+        <h1>WeddingFlowers 🌸</h1>
+        <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+            <label>Bridal Bouquet (Large)</label>
+            <input type="number" id="bb" value="1" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Bridesmaid Bouquets (Medium)</label>
+            <input type="number" id="bm" value="4" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Table Centerpieces</label>
+            <input type="number" id="tc" value="10" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="background: #ff8e8e; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 2rem; font-weight: bold;"><span id="res">280</span> Stems</div>
+                <div>Total Suggested Order</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const bb = parseInt(document.getElementById('bb').value) || 0;
+            const bm = parseInt(document.getElementById('bm').value) || 0;
+            const tc = parseInt(document.getElementById('tc').value) || 0;
+            const total = (bb * 30) + (bm * 15) + (tc * 20);
+            document.getElementById('res').textContent = total;
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+    </script>
+</body>
+</html>

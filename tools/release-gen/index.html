@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReleaseGen | Changelog Builder</title>
+    <style>
+        body { background: #1e272e; color: white; font-family: monospace; padding: 2rem; }
+        .app { max-width: 800px; margin: auto; }
+        textarea { width: 100%; height: 100px; background: #000; color: #00ff41; padding: 15px; border: 1px solid #444; margin-bottom: 1rem; font-size: 1rem; }
+        .res { background: #111; padding: 2rem; border-radius: 8px; white-space: pre-wrap; border: 1px solid #00ff41; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html" style="color: #aaa;">&#8592; Back</a>
+        <h1>ReleaseGen 🚀📜</h1>
+        <label>Version</label><input type="text" id="v" value="1.0.0" style="margin-bottom:10px;"><br>
+        <label>New Features (comma separated)</label>
+        <textarea id="f" placeholder="Dark mode, API v2, New landing page"></textarea>
+        <label>Fixes</label>
+        <textarea id="x" placeholder="Login bug, Mobile alignment, Typo in header"></textarea>
+        <div class="res" id="out"></div>
+    </div>
+    <script>
+        function update() {
+            const v = document.getElementById('v').value;
+            const f = document.getElementById('f').value.split(',').map(s => "- ✨ " + s.trim()).join('\n');
+            const x = document.getElementById('x').value.split(',').map(s => "- 🐛 " + s.trim()).join('\n');
+            document.getElementById('out').textContent = `## Release [${v}] - ${new Date().toLocaleDateString()}\n\n### Added\n${f}\n\n### Fixed\n${x}`;
+        }
+        document.querySelectorAll('input, textarea').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

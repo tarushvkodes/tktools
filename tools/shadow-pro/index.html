@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShadowPro | Layered CSS</title>
+    <style>
+        body { background: #f1f2f6; color: #2f3542; font-family: sans-serif; padding: 2rem; }
+        .app { max-width: 900px; margin: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .preview { height: 300px; background: white; display: flex; align-items: center; justify-content: center; border-radius: 20px; }
+        .box { width: 100px; height: 100px; background: #007aff; border-radius: 15px; }
+        input { width: 100%; margin-bottom: 1rem; }
+        pre { background: #2d3436; color: #00ff41; padding: 1rem; border-radius: 8px; font-size: 0.8rem; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <div class="controls">
+            <a href="../../index.html" style="color: #aaa;">← Back</a>
+            <h1>ShadowPro 🌑✨</h1>
+            <label>Distance</label><input type="range" id="d" min="0" max="50" value="10">
+            <label>Blur</label><input type="range" id="b" min="0" max="100" value="20">
+            <label>Opacity</label><input type="range" id="o" min="0" max="1" step="0.05" value="0.2">
+            <pre id="code"></pre>
+        </div>
+        <div class="preview"><div class="box" id="pb"></div></div>
+    </div>
+    <script>
+        function update() {
+            const d = document.getElementById('d').value;
+            const b = document.getElementById('b').value;
+            const o = document.getElementById('o').value;
+            const style = `box-shadow: 0 ${d}px ${b}px rgba(0,0,0,${o});`;
+            document.getElementById('pb').style.cssText = style;
+            document.getElementById('code').textContent = style;
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

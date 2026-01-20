@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZenGarden | Ambient Sounds</title>
+</head>
+<body style="background: #2c3e50; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+        <a href="../../index.html" style="color: #95a5a6;">← Back</a>
+        <h1>ZenGarden 🌿🌊</h1>
+        <p>Pure CSS/JS procedural visuals & ambient placeholders.</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
+            <div id="rain" style="background: #34495e; padding: 2rem; border-radius: 12px; cursor: pointer; border: 2px solid transparent;">🌧️ Rain</div>
+            <div id="wind" style="background: #34495e; padding: 2rem; border-radius: 12px; cursor: pointer; border: 2px solid transparent;">🌬️ Wind</div>
+            <div id="birds" style="background: #34495e; padding: 2rem; border-radius: 12px; cursor: pointer; border: 2px solid transparent;">🐦 Birds</div>
+            <div id="waves" style="background: #34495e; padding: 2rem; border-radius: 12px; cursor: pointer; border: 2px solid transparent;">🌊 Waves</div>
+        </div>
+        <div id="viz" style="height: 100px; background: #111; margin-top: 2rem; border-radius: 50px; overflow: hidden; position: relative;">
+            <div id="bar" style="height: 100%; width: 0%; background: #00b894; transition: width 0.1s;"></div>
+        </div>
+    </div>
+    <script>
+        // No actual audio files to keep it GitHub Pages compatible without assets
+        // But we can simulate the UI and visualizer
+        document.querySelectorAll('div[id]').forEach(el => {
+            if(el.id === 'viz' || el.id === 'bar') return;
+            el.addEventListener('click', () => {
+                document.querySelectorAll('div[id]').forEach(x => x.style.borderColor = 'transparent');
+                el.style.borderColor = '#00b894';
+                // Simulation of visualizer
+                setInterval(() => {
+                    document.getElementById('bar').style.width = (Math.random() * 100) + "%";
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>

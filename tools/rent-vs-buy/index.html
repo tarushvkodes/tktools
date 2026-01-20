@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RentVsBuy | Simple Breakeven</title>
+</head>
+<body style="background: #1abc9c; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #fff;">← Back</a>
+        <h1>RentVsBuy 🏠</h1>
+        <div style="background: rgba(0,0,0,0.1); padding: 2rem; border-radius: 12px;">
+            <label>Monthly Rent ($)</label><input type="number" id="r" value="1500" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Purchase Price ($)</label><input type="number" id="p" value="300000" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Property Tax + Ins + Maint ($/mo)</label><input type="number" id="o" value="600" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 1rem;">
+                <div style="font-size: 0.9rem;">Price-to-Rent Ratio</div>
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res">16.7</span></div>
+                <p id="verdict">Reasonable to buy.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const r = parseFloat(document.getElementById('r').value) || 1;
+            const p = parseFloat(document.getElementById('p').value) || 0;
+            const ratio = p / (r * 12);
+            document.getElementById('res').textContent = ratio.toFixed(1);
+            let v = "Buy!"; if(ratio > 20) v = "Rent!"; else if(ratio > 15) v = "Borderline.";
+            document.getElementById('verdict').textContent = v;
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

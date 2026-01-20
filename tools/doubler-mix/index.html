@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoublerMix | E-Liquid Doubler Calculator</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="app-container">
+        <header class="app-header">
+            <a href="../../index.html" class="back-link">← TKTools</a>
+            <h1>DoublerMix</h1>
+            <p>Calculate nicotine and base for doubler juice bottles.</p>
+        </header>
+
+        <main class="calc-grid">
+            <section class="glass-panel tool-panel">
+                <div class="input-group">
+                    <label>Doubler Volume (ml)</label>
+                    <input type="number" id="doubler-vol" value="15">
+                    <small>Amount of concentrated juice currently in bottle.</small>
+                </div>
+                
+                <div class="input-group">
+                    <label>Target Nicotine (mg/ml)</label>
+                    <input type="number" id="target-nic" value="3" step="0.5">
+                </div>
+
+                <div class="input-group">
+                    <label>Nicotine Base Strength (mg/ml)</label>
+                    <input type="number" id="base-nic" value="100">
+                </div>
+
+                <div class="result-display">
+                    <span class="label">Add To Bottle</span>
+                    <div class="res-row"><span>Nicotine Base:</span> <strong id="res-nic-ml">0.45 ml</strong></div>
+                    <div class="res-row"><span>Plain PG/VG:</span> <strong id="res-plain-ml">14.55 ml</strong></div>
+                    <div class="separator-light"></div>
+                    <div class="res-row highlight"><span>Final Total:</span> <strong id="res-total">30 ml</strong></div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

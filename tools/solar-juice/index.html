@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarJuice | Power Station Charging Calc</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        body { background: #1e272e; color: white; font-family: sans-serif; }
+        .app-container { max-width: 600px; margin: 0 auto; padding: 2rem; }
+        .input-group { margin-bottom: 1rem; }
+        label { display: block; margin-bottom: 5px; color: #808e9b; }
+        input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #485460; background: #050505; color: #ffa801; font-size: 1.1rem; }
+        .result-panel { background: #ffa801; color: #1e272e; padding: 2rem; border-radius: 12px; text-align: center; margin-top: 2rem; }
+        .hours { font-size: 3rem; font-weight: 900; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <a href="../../index.html" style="color: #808e9b; text-decoration: none;">← Back</a>
+        <h1>SolarJuice</h1>
+        <p>Estimate how long it takes to charge your power station via solar.</p>
+
+        <div class="input-group">
+            <label>Station Capacity (Wh)</label>
+            <input type="number" id="cap" value="1000">
+        </div>
+        <div class="input-group">
+            <label>Current Battery (%)</label>
+            <input type="number" id="curr" value="20">
+        </div>
+        <div class="input-group">
+            <label>Solar Panel Rated Power (Watts)</label>
+            <input type="number" id="panel" value="200">
+        </div>
+        <div class="input-group">
+            <label>Efficiency Factor (typ. 0.70 - 0.85)</label>
+            <input type="number" id="eff" value="0.75" step="0.05">
+        </div>
+
+        <div class="result-panel">
+            <div style="text-transform: uppercase; font-size: 0.8rem; font-weight: bold;">Estimated Charging Time</div>
+            <div class="hours" id="res-hrs">5.3</div>
+            <div style="font-weight: bold;">Sun Hours</div>
+            <p id="res-desc" style="font-size: 0.9rem; margin-top: 10px;">To reach 100% from 20%</p>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const cap = parseFloat(document.getElementById('cap').value) || 0;
+            const curr = parseFloat(document.getElementById('curr').value) || 0;
+            const panel = parseFloat(document.getElementById('panel').value) || 0;
+            const eff = parseFloat(document.getElementById('eff').value) || 0;
+
+            const neededWh = cap * (1 - curr/100);
+            const realWatts = panel * eff;
+            const hrs = neededWh / realWatts;
+
+            document.getElementById('res-hrs').textContent = hrs > 100 ? '>100' : hrs.toFixed(1);
+            document.getElementById('res-desc').textContent = `To reach 100% from ${curr}% at ~${realWatts.toFixed(0)}W effective input.`;
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

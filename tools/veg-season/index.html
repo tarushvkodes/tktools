@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeggieSeason | Planting Calendar</title>
+    <style>
+        body { background: #f1f2f6; color: #2f3542; font-family: sans-serif; padding: 2rem; }
+        .app { max-width: 800px; margin: auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
+        .card { background: white; padding: 1rem; border-radius: 10px; border-left: 5px solid #2ed573; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .month { font-weight: bold; color: #747d8c; font-size: 0.8rem; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html">← Back</a>
+        <h1>VeggieSeason 🍅🌱</h1>
+        <p>What to plant right now (Northern Hemisphere).</p>
+        <select id="m" style="width:100%; padding:10px; margin-bottom:2rem;"></select>
+        <div class="grid" id="list"></div>
+    </div>
+    <script>
+        const data = [
+            ["Kale", "Peas", "Spinach"], ["Carrots", "Lettuce", "Radish"], ["Broccoli", "Potatoes", "Onions"],
+            ["Tomatoes", "Peppers", "Corn"], ["Cucumber", "Squash", "Beans"], ["Basil", "Melons", "Eggplant"],
+            ["Chard", "Beets"], ["Winter Squash", "Pumpkins"], ["Garlic", "Broad Beans"],
+            ["Cover Crops"], ["Planning!"], ["Microgreens"]
+        ];
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const select = document.getElementById('m');
+        months.forEach((m, i) => select.add(new Option(m, i)));
+        select.value = new Date().getMonth();
+        
+        function update() {
+            const m = select.value;
+            document.getElementById('list').innerHTML = data[m].map(v => `
+                <div class="card">
+                    <div class="month">Planting</div>
+                    <div style="font-size: 1.2rem; font-weight: bold;">${v}</div>
+                </div>
+            `).join('');
+        }
+        select.addEventListener('change', update);
+        update();
+    </script>
+</body>
+</html>

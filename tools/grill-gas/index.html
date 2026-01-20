@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrillGas | Tank Level</title>
+</head>
+<body style="background: #34495e; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #7f8c8d;">← Back</a>
+        <h1>GrillGas 🍖🔥</h1>
+        <div style="background: #2c3e50; padding: 2rem; border-radius: 12px;">
+            <label>Current Weight (lb - Total Scale Reading)</label><input type="number" id="w" value="30" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Empty Tank Weight (Tare - stamped on collar)</label><input type="number" id="t" value="17" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="background: white; color: #2c3e50; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res">65</span>%</div>
+                <div>Propane Remaining</div>
+                <p style="font-size: 0.8rem; margin-top: 10px;">Approx. <span id="hrs">9</span> hours of grilling left.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const w = parseFloat(document.getElementById('w').value) || 0;
+            const t = parseFloat(document.getElementById('t').value) || 0;
+            const gas = w - t;
+            const percent = (gas / 20) * 100; // Standard tank holds 20lb
+            document.getElementById('res').textContent = Math.max(0, Math.round(percent));
+            document.getElementById('hrs').textContent = Math.max(0, Math.round(gas * 0.7)); // Approx 0.7 hrs per lb
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

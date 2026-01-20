@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrewGuide | Coffee Steps</title>
+    <style>
+        body { background: #3c2a1e; color: #d2b48c; font-family: serif; padding: 2rem; }
+        .app { max-width: 600px; margin: auto; text-align: center; }
+        .step { background: rgba(0,0,0,0.2); padding: 2rem; border-radius: 15px; margin: 2rem 0; min-height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        button { background: #d2b48c; color: #3c2a1e; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html" style="color: #6f4e37;">← Back</a>
+        <h1>BrewGuide ☕📖</h1>
+        <p>V60 Pour-over step-by-step.</p>
+        <div class="step">
+            <h2 id="s-t">Step 1: Prep</h2>
+            <p id="s-d">Rinse filter paper with hot water and grind 15g of coffee (medium-fine).</p>
+        </div>
+        <button id="next" onclick="next()">NEXT STEP</button>
+    </div>
+    <script>
+        const steps = [
+            {t:"Step 1: Prep", d:"Rinse filter paper with hot water and grind 15g of coffee (medium-fine)."},
+            {t:"Step 2: Bloom", d:"Add coffee and 30g of water. Wait 30 seconds for gas to escape."},
+            {t:"Step 3: First Pour", d:"Slowly pour water in circles up to 150g total weight."},
+            {t:"Step 4: Final Pour", d:"Pour remaining water up to 250g. Draw down should finish by 3:00."},
+            {t:"Step 5: Enjoy", d:"Remove dripper, swirl the carafe, and pour your perfect cup."}
+        ];
+        let i = 0;
+        function next() {
+            i = (i + 1) % steps.length;
+            document.getElementById('s-t').textContent = steps[i].t;
+            document.getElementById('s-d').textContent = steps[i].d;
+            document.getElementById('next').textContent = i === steps.length-1 ? "RESTART" : "NEXT STEP";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpellTrack | Slots Counter</title>
+    <style>
+        body { background: #1e272e; color: white; font-family: sans-serif; padding: 2rem; }
+        .app { max-width: 600px; margin: auto; text-align: center; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .slot-box { background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 12px; }
+        .circle { width: 20px; height: 20px; border: 2px solid #3498db; border-radius: 50%; display: inline-block; margin: 2px; cursor: pointer; }
+        .circle.used { background: #3498db; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html" style="color: #aaa;">← Back</a>
+        <h1>SpellTrack ✨📖</h1>
+        <p>Click circles to use/restore slots.</p>
+        <div class="grid" id="grid">
+            <!-- Slots -->
+        </div>
+        <button onclick="reset()" style="margin-top: 2rem; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">LONG REST (RESET)</button>
+    </div>
+    <script>
+        const counts = [4, 3, 3, 3, 2, 1, 1, 1, 1];
+        function render() {
+            const used = JSON.parse(localStorage.getItem('tk-slots') || '[]');
+            document.getElementById('grid').innerHTML = counts.map((max, i) => {
+                let circles = "";
+                for(let j=0; j<max; j++) {
+                    const isUsed = used.includes(`${i}-${j}`);
+                    circles += `<div class="circle ${isUsed ? 'used' : ''}" onclick="toggle(${i}, ${j})"></div>`;
+                }
+                return `<div class="slot-box"><div>Lvl ${i+1}</div>${circles}</div>`;
+            }).join('');
+        }
+        function toggle(l, s) {
+            let used = JSON.parse(localStorage.getItem('tk-slots') || '[]');
+            const id = `${l}-${s}`;
+            if(used.includes(id)) used = used.filter(x => x !== id);
+            else used.push(id);
+            localStorage.setItem('tk-slots', JSON.stringify(used));
+            render();
+        }
+        function reset() { localStorage.removeItem('tk-slots'); render(); }
+        render();
+    </script>
+</body>
+</html>

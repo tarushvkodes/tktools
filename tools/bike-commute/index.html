@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BikeCommute | Savings Calculator</title>
+</head>
+<body style="background: #38ada9; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>BikeCommute 🚲</h1>
+        <div style="background: rgba(0,0,0,0.2); padding: 2rem; border-radius: 12px;">
+            <label>Commute Distance (km - One Way)</label>
+            <input type="number" id="d" value="8" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Fuel Cost ($ per Liter)</label>
+            <input type="number" id="f" value="1.5" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Car Efficiency (L/100km)</label>
+            <input type="number" id="e" value="8" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: center; margin-top: 1rem;">
+                <div style="background: #079992; padding: 1rem; border-radius: 8px;">
+                    <div style="font-size: 1.5rem; font-weight: bold;">$<span id="res-m">38</span></div>
+                    <div>Monthly Savings</div>
+                </div>
+                <div style="background: #079992; padding: 1rem; border-radius: 8px;">
+                    <div style="font-size: 1.5rem; font-weight: bold;"><span id="res-c">6.7</span>kg</div>
+                    <div>CO2 Saved</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const d = parseFloat(document.getElementById('d').value) || 0;
+            const f = parseFloat(document.getElementById('f').value) || 0;
+            const e = parseFloat(document.getElementById('e').value) || 1;
+            const monthlyKm = d * 2 * 20; // 20 working days
+            const liters = (monthlyKm / 100) * e;
+            const saved = liters * f;
+            const co2 = liters * 2.3; // Approx 2.3kg CO2 per liter
+            document.getElementById('res-m').textContent = Math.round(saved);
+            document.getElementById('res-c').textContent = co2.toFixed(1);
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

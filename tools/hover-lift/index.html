@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HoverLift | RC Hovercraft Thrust</title>
+</head>
+<body style="background: #34495e; color: #ecf0f1; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #3498db;">← Back</a>
+        <h1>HoverLift 🚤</h1>
+        <div style="background: #2c3e50; padding: 2rem; border-radius: 12px;">
+            <label>Total Craft Weight (kg)</label>
+            <input type="number" id="w" value="2.5" style="width:100%; padding:10px; margin-bottom:20px;">
+            <label>Cushion Area (m² - Length x Width)</label>
+            <input type="number" id="a" value="0.5" style="width:100%; padding:10px; margin-bottom:20px;">
+            <div style="background: #3498db; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 0.9rem;">Min. Lift Static Pressure</div>
+                <div style="font-size: 2rem; font-weight: bold;"><span id="res">49</span> Pa</div>
+                <p style="font-size: 0.8rem; margin-top: 10px;">Aim for 2x this pressure for actual flight.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const w = parseFloat(document.getElementById('w').value) || 0;
+            const a = parseFloat(document.getElementById('a').value) || 1;
+            // Pressure = Force / Area = (m * g) / Area
+            const pa = (w * 9.81) / a;
+            document.getElementById('res').textContent = Math.round(pa);
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+    </script>
+</body>
+</html>

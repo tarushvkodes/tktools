@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MorseConvert | Signal Tool</title>
+</head>
+<body style="background: #1e272e; color: white; font-family: monospace; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+        <a href="../../index.html" style="color: #485460;">← Back</a>
+        <h1>MorseConvert 📡📻</h1>
+        <textarea id="in" style="width:100%; height:100px; background:#000; color:#00ff41; padding:10px; font-size:1.2rem;" placeholder="Type text here..."></textarea>
+        <div id="res" style="font-size: 2rem; margin-top: 2rem; word-break: break-all; color: #fdcb6e;">
+            .... . .-.. .-.. ---
+        </div>
+    </div>
+    <script>
+        const map = { 'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..', ' ': ' / ' };
+        document.getElementById('in').addEventListener('input', (e) => {
+            const val = e.target.value.toUpperCase();
+            document.getElementById('res').textContent = val.split('').map(c => map[c] || '').join(' ');
+        });
+    </script>
+</body>
+</html>

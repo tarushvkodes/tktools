@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YarnYard | Crochet & Knitting Estimator</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        body { background: #f7f1e3; color: #40407a; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        .app-container { max-width: 600px; margin: 0 auto; padding: 2rem; }
+        .glass-panel { background: rgba(255,255,255,0.7); border: 1px solid #d1ccc0; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        select, input { width: 100%; padding: 12px; margin: 10px 0 20px; border-radius: 10px; border: 1px solid #d1ccc0; }
+        .result { background: #ff5252; color: white; padding: 1.5rem; border-radius: 15px; text-align: center; font-size: 1.5rem; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <a href="../../index.html" style="color: #aaa; text-decoration: none;">← Back</a>
+        <h1 style="color: #ff5252;">YarnYard 🧶</h1>
+        <p>Estimate how many yards of yarn you'll need for your next project.</p>
+
+        <div class="glass-panel">
+            <label>Project Type</label>
+            <select id="project">
+                <option value="sc-ad">Scarf (Adult)</option>
+                <option value="sw-ad">Sweater (Adult L)</option>
+                <option value="bl-th">Blanket (Throw)</option>
+                <option value="ha-ad">Hat (Adult)</option>
+                <option value="so-ad">Socks (Pair)</option>
+            </select>
+
+            <label>Yarn Weight</label>
+            <select id="weight">
+                <option value="1">1 - Fingering / Sock</option>
+                <option value="2">2 - Sport</option>
+                <option value="3">3 - DK / Light Worsted</option>
+                <option value="4" selected>4 - Worsted / Medium</option>
+                <option value="5">5 - Bulky</option>
+            </select>
+
+            <div class="result">
+                Estimated: <span id="res-yard">0</span> yards
+            </div>
+        </div>
+    </div>
+    <script>
+        const table = {
+            'sc-ad': [450, 400, 375, 350, 300],
+            'sw-ad': [2000, 1800, 1500, 1200, 1000],
+            'bl-th': [4000, 3500, 3000, 2500, 2000],
+            'ha-ad': [250, 225, 200, 175, 150],
+            'so-ad': [450, 400, 350, 300, 250]
+        };
+        function update() {
+            const p = document.getElementById('project').value;
+            const w = parseInt(document.getElementById('weight').value) - 1;
+            document.getElementById('res-yard').textContent = table[p][w];
+        }
+        document.querySelectorAll('select').forEach(s => s.addEventListener('change', update));
+        update();
+    </script>
+</body>
+</html>

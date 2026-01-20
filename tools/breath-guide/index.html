@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BreathGuide | Calm Box Breathing</title>
+    <style>
+        body { background: #fdfafd; color: #475569; font-family: sans-serif; padding: 2rem; text-align: center; }
+        .app { max-width: 400px; margin: auto; }
+        .circle { width: 200px; height: 200px; border: 10px solid #cbd5e1; border-radius: 50%; margin: 3rem auto; position: relative; display: flex; align-items: center; justify-content: center; }
+        .ball { width: 20px; height: 20px; background: #38bdf8; border-radius: 50%; animation: breathe 16s infinite ease-in-out; }
+        .msg { font-size: 1.5rem; font-weight: bold; color: #0f172a; }
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(4); } /* Inhale 4s */
+            50% { transform: scale(4); } /* Hold 4s */
+            75% { transform: scale(1); } /* Exhale 4s */
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html" style="color: #94a3b8;">← Back</a>
+        <h1>BreathGuide 🧘🌀</h1>
+        <div class="circle"><div class="ball" id="b"></div></div>
+        <div class="msg" id="m">Inhale...</div>
+    </div>
+    <script>
+        const msgs = ["Inhale", "Hold", "Exhale", "Hold"];
+        let i = 0;
+        setInterval(() => {
+            document.getElementById('m').textContent = msgs[i] + "...";
+            i = (i + 1) % 4;
+        }, 4000);
+    </script>
+</body>
+</html>

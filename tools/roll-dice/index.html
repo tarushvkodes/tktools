@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RollDice | Virtual d6</title>
+    <style>
+        body { background: #1e272e; color: white; font-family: sans-serif; text-align: center; padding: 2rem; }
+        .die { width: 100px; height: 100px; background: white; color: #1e272e; margin: 3rem auto; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 4rem; font-weight: bold; cursor: pointer; transition: transform 0.2s; }
+        .die:active { transform: scale(0.9); }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" style="color: #485460;">← Back</a>
+    <h1>RollDice 🎲🎲</h1>
+    <div class="die" id="d" onclick="roll()">1</div>
+    <button onclick="roll()" style="background:#00d2d3; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;">ROLL AGAIN</button>
+    <script>
+        function roll() {
+            const d = document.getElementById('d');
+            d.style.transform = "rotate(360deg)";
+            setTimeout(() => {
+                d.textContent = Math.floor(Math.random() * 6) + 1;
+                d.style.transform = "rotate(0deg)";
+            }, 200);
+        }
+    </script>
+</body>
+</html>

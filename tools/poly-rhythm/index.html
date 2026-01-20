@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PolyRhythm | Visual Metronome</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="app-container">
+        <header class="app-header">
+            <a href="../../index.html" class="back-link">← TKTools</a>
+            <h1>PolyRhythm</h1>
+            <p>Visualize and hear complex polyrhythms.</p>
+        </header>
+
+        <main class="calc-grid">
+            <!-- Controls -->
+            <section class="glass-panel tool-panel controls">
+                <div class="control-row">
+                    <div class="input-group">
+                        <label>Rhythm A (Beats)</label>
+                        <input type="number" id="beat-a" value="3" min="1" max="20">
+                    </div>
+                    <div class="input-group">
+                        <label>Rhythm B (Beats)</label>
+                        <input type="number" id="beat-b" value="4" min="1" max="20">
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label>BPM (Global)</label>
+                    <input type="range" id="bpm" min="30" max="200" value="60">
+                    <div class="value-display" id="bpm-val">60 BPM</div>
+                </div>
+
+                <button id="play-btn" class="primary-btn">▶ Play</button>
+            </section>
+
+            <!-- Visualizer -->
+            <section class="glass-panel tool-panel visualizer">
+                <div class="track track-a">
+                    <div class="label">A</div>
+                    <div class="dots-container" id="dots-a"></div>
+                </div>
+                <div class="separator"></div>
+                <div class="track track-b">
+                    <div class="label">B</div>
+                    <div class="dots-container" id="dots-b"></div>
+                </div>
+                
+                <div class="wheel-container">
+                    <canvas id="poly-canvas" width="300" height="300"></canvas>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

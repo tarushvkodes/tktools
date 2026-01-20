@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BirdSeed | Feeder Cost</title>
+</head>
+<body style="background: #795548; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #d7ccc8;">← Back</a>
+        <h1>BirdSeed 🐦</h1>
+        <div style="background: #5d4037; padding: 2rem; border-radius: 12px;">
+            <label>Bag Weight (lb)</label><input type="number" id="w" value="20" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Bag Price ($)</label><input type="number" id="p" value="15" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Refills Per Week</label><input type="number" id="r" value="3" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Feeder Size (lb)</label><input type="number" id="s" value="2" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="background: white; color: #5d4037; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 2rem; font-weight: bold;">$<span id="res">18.25</span></div>
+                <div>Monthly Feeding Cost</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const w = parseFloat(document.getElementById('w').value) || 1;
+            const p = parseFloat(document.getElementById('p').value) || 0;
+            const r = parseFloat(document.getElementById('r').value) || 0;
+            const s = parseFloat(document.getElementById('s').value) || 0;
+            const costPerLb = p / w;
+            const monthly = costPerLb * (r * s) * 4.3; // 4.3 weeks per month
+            document.getElementById('res').textContent = monthly.toFixed(2);
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

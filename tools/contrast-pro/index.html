@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContrastPro | WCAG Checker</title>
+    <style>
+        body { background: #fdfafd; color: #333; font-family: sans-serif; padding: 2rem; }
+        .app { max-width: 600px; margin: auto; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; height: 50px; }
+        .preview { margin-top: 2rem; padding: 3rem; border-radius: 15px; text-align: center; border: 1px solid #eee; }
+        .res { font-size: 2rem; font-weight: bold; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html">← Back</a>
+        <h1>ContrastPro 👁️🎨</h1>
+        <div class="grid">
+            <div><label>Background</label><input type="color" id="bg" value="#ffffff"></div>
+            <div><label>Foreground</label><input type="color" id="fg" value="#007aff"></div>
+        </div>
+        <div id="pv" class="preview">
+            <h2 id="txt">Sample Text</h2>
+            <p>Check the readability of this pairing.</p>
+        </div>
+        <div class="res" id="ratio">4.5:1</div>
+        <div id="status">PASS (AA Large)</div>
+    </div>
+    <script>
+        function getLuminance(hex) {
+            const rgb = hex.match(/[A-Za-z0-9]{2}/g).map(v => parseInt(v, 16) / 255);
+            const a = rgb.map(v => v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4));
+            return 0.2126 * a[0] + 0.7152 * a[1] + 0.0722 * a[2];
+        }
+        function update() {
+            const bg = document.getElementById('bg').value;
+            const fg = document.getElementById('fg').value;
+            const lum1 = getLuminance(bg);
+            const lum2 = getLuminance(fg);
+            const ratio = (Math.max(lum1, lum2) + 0.05) / (Math.min(lum1, lum2) + 0.05);
+            document.getElementById('ratio').textContent = ratio.toFixed(2) + ":1";
+            document.getElementById('pv').style.backgroundColor = bg;
+            document.getElementById('pv').style.color = fg;
+            let s = "FAIL"; if(ratio >= 7) s = "PASS (AAA)"; else if(ratio >= 4.5) s = "PASS (AA)";
+            document.getElementById('status').textContent = s;
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

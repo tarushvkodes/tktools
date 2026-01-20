@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovingBox | Box Estimator</title>
+</head>
+<body style="background: #e67e22; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>MovingBox 📦</h1>
+        <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px;">
+            <label>Number of Bedrooms</label>
+            <input type="number" id="br" value="2" style="width:100%; padding:10px; margin-bottom:20px;">
+            <label>Lifestyle</label>
+            <select id="ls" style="width:100%; padding:10px; margin-bottom:20px;">
+                <option value="0.8">Minimalist</option>
+                <option value="1" selected>Average</option>
+                <option value="1.5">Pack-rat / Collector</option>
+            </select>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; text-align: center;">
+                <div style="background: white; color: #333; padding: 1rem; border-radius: 8px;">
+                    <div style="font-size: 2rem; font-weight: bold;" id="res-m">30</div>
+                    <div>Medium Boxes</div>
+                </div>
+                <div style="background: white; color: #333; padding: 1rem; border-radius: 8px;">
+                    <div style="font-size: 2rem; font-weight: bold;" id="res-l">15</div>
+                    <div>Large Boxes</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const br = parseInt(document.getElementById('br').value) || 0;
+            const ls = parseFloat(document.getElementById('ls').value);
+            document.getElementById('res-m').textContent = Math.round(br * 15 * ls);
+            document.getElementById('res-l').textContent = Math.round(br * 8 * ls);
+        }
+        document.querySelectorAll('input, select').forEach(i => i.addEventListener('input', update));
+    </script>
+</body>
+</html>

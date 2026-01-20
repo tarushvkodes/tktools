@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogicGates | Interactive Truth</title>
+    <style>
+        body { background: #1e293b; color: white; font-family: sans-serif; padding: 2rem; text-align: center; }
+        .gate { background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; display: inline-block; margin: 1rem; }
+        .in { width: 40px; height: 40px; background: #334155; border-radius: 50%; display: inline-block; cursor: pointer; line-height: 40px; }
+        .in.on { background: #10b981; }
+        .out { width: 60px; height: 60px; background: #334155; border-radius: 50%; display: block; margin: 1rem auto; line-height: 60px; }
+        .out.on { background: #fbbf24; box-shadow: 0 0 20px #fbbf24; }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" style="color: #64748b;">← Back</a>
+    <h1>LogicGates 💻🔌</h1>
+    <div class="gate">
+        <h3>AND GATE</h3>
+        <div id="a1" class="in" onclick="t(this)">0</div>
+        <div id="a2" class="in" onclick="t(this)">0</div>
+        <div id="ao" class="out">0</div>
+    </div>
+    <div class="gate">
+        <h3>OR GATE</h3>
+        <div id="o1" class="in" onclick="t(this)">0</div>
+        <div id="o2" class="in" onclick="t(this)">0</div>
+        <div id="oo" class="out">0</div>
+    </div>
+    <script>
+        function t(el) {
+            el.classList.toggle('on');
+            el.textContent = el.classList.contains('on') ? "1" : "0";
+            update();
+        }
+        function update() {
+            const a1 = document.getElementById('a1').classList.contains('on');
+            const a2 = document.getElementById('a2').classList.contains('on');
+            const ao = document.getElementById('ao');
+            if(a1 && a2) { ao.classList.add('on'); ao.textContent = "1"; } else { ao.classList.remove('on'); ao.textContent = "0"; }
+            
+            const o1 = document.getElementById('o1').classList.contains('on');
+            const o2 = document.getElementById('o2').classList.contains('on');
+            const oo = document.getElementById('oo');
+            if(o1 || o2) { oo.classList.add('on'); oo.textContent = "1"; } else { oo.classList.remove('on'); oo.textContent = "0"; }
+        }
+    </script>
+</body>
+</html>

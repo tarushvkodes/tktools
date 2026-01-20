@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StorageCalc | Capacity Estimator</title>
+</head>
+<body style="background: #2d3436; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #636e72;">← Back</a>
+        <h1>StorageCalc 📸💾</h1>
+        <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px;">
+            <label>Card Size (GB)</label><input type="number" id="g" value="64" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Average Photo Size (MB - e.g. 10 for JPG, 30 for RAW)</label><input type="number" id="p" value="10" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="background: #e17055; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res">6400</span></div>
+                <div>Photos Remaning</div>
+                <p style="font-size: 0.8rem; margin-top: 10px;">Or approx. <span id="vid">2</span> hours of 4K video.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const g = parseFloat(document.getElementById('g').value) || 0;
+            const p = parseFloat(document.getElementById('p').value) || 1;
+            const count = (g * 1024) / p;
+            document.getElementById('res').textContent = Math.floor(count);
+            document.getElementById('vid').textContent = Math.round(g / 30); // Approx 30GB per hour of 4K
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

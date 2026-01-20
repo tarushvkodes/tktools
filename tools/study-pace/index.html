@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyPace | Reading Planner</title>
+</head>
+<body style="background: #60a3bc; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>StudyPace 📖</h1>
+        <div style="background: rgba(0,0,0,0.2); padding: 2rem; border-radius: 12px;">
+            <label>Total Pages Remaining</label>
+            <input type="number" id="p" value="200" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Days Until Deadline</label>
+            <input type="number" id="d" value="5" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Hours Available Per Day</label>
+            <input type="number" id="h" value="2" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="background: white; color: #0a3d62; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 0.9rem;">You Need to Read</div>
+                <div style="font-size: 2rem; font-weight: bold;"><span id="res">20</span> Pages/Hour</div>
+                <p style="font-size: 0.8rem; margin-top: 5px;">Or <span id="res-d">40</span> pages per day.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const p = parseFloat(document.getElementById('p').value) || 0;
+            const d = parseFloat(document.getElementById('d').value) || 1;
+            const h = parseFloat(document.getElementById('h').value) || 1;
+            const perDay = p / d;
+            const perHour = perDay / h;
+            document.getElementById('res').textContent = Math.ceil(perHour);
+            document.getElementById('res-d').textContent = Math.ceil(perDay);
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

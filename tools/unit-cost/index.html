@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UnitCost | Smart Shopper</title>
+</head>
+<body style="background: #27ae60; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>UnitCost 🛒🏷️</h1>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
+            <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 12px;">
+                <h3>Option A</h3>
+                <label>Price ($)</label><input type="number" id="pa" value="5.99" style="width:100%; padding:10px;">
+                <label>Size (oz/g)</label><input type="number" id="sa" value="16" style="width:100%; padding:10px;">
+                <div style="margin-top: 1rem;">$<span id="ua">0.37</span>/unit</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 12px;">
+                <h3>Option B</h3>
+                <label>Price ($)</label><input type="number" id="pb" value="9.99" style="width:100%; padding:10px;">
+                <label>Size (oz/g)</label><input type="number" id="sb" value="32" style="width:100%; padding:10px;">
+                <div style="margin-top: 1rem;">$<span id="ub">0.31</span>/unit</div>
+            </div>
+        </div>
+        <div id="verdict" style="background: white; color: #27ae60; padding: 1rem; border-radius: 10px; text-align: center; margin-top: 1rem; font-weight: bold; font-size: 1.2rem;">Option B is better!</div>
+    </div>
+    <script>
+        function update() {
+            const pa = parseFloat(document.getElementById('pa').value) || 0;
+            const sa = parseFloat(document.getElementById('sa').value) || 1;
+            const pb = parseFloat(document.getElementById('pb').value) || 0;
+            const sb = parseFloat(document.getElementById('sb').value) || 1;
+            const ua = pa / sa;
+            const ub = pb / sb;
+            document.getElementById('ua').textContent = ua.toFixed(2);
+            document.getElementById('ub').textContent = ub.toFixed(2);
+            document.getElementById('verdict').textContent = ua < ub ? "Option A is better!" : "Option B is better!";
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

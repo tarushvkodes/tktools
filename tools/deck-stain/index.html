@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeckStain | Gallon Estimator</title>
+</head>
+<body style="background: #a0522d; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #deb887;">← Back</a>
+        <h1>DeckStain 🪵🖌️</h1>
+        <div style="background: rgba(0,0,0,0.2); padding: 2rem; border-radius: 12px;">
+            <label>Deck Area (sq ft)</label><input type="number" id="a" value="200" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Condition</label>
+            <select id="c" style="width:100%; padding:10px; margin-bottom:15px;">
+                <option value="200">New / Smooth (200 sqft/gal)</option>
+                <option value="150">Old / Weathered (150 sqft/gal)</option>
+            </select>
+            <div style="background: white; color: #8b4513; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 2rem; font-weight: bold;"><span id="res">1.3</span> Gallons</div>
+                <div>Stain to Order</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const a = parseFloat(document.getElementById('a').value) || 0;
+            const c = parseFloat(document.getElementById('c').value);
+            document.getElementById('res').textContent = (a / c).toFixed(1);
+        }
+        document.querySelectorAll('input, select').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

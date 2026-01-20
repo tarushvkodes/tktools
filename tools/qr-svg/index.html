@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QrSvg | Simple Generator</title>
+    <style>
+        body { background: #353b48; color: white; font-family: sans-serif; text-align: center; padding: 2rem; }
+        input { width: 100%; max-width: 400px; padding: 15px; font-size: 1.1rem; border-radius: 8px; border: none; margin-bottom: 2rem; }
+        #qr { background: white; display: inline-block; padding: 20px; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" style="color: #aaa;">← Back</a>
+    <h1>QrSvg 📲🔳</h1>
+    <input type="text" id="in" value="https://google.com" placeholder="Paste URL here...">
+    <br>
+    <div id="qr">
+        <!-- Using a public API for the image to keep this client-side and simple -->
+        <img id="img" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://google.com" alt="QR Code">
+    </div>
+    <p>Right-click image to save.</p>
+    <script>
+        document.getElementById('in').addEventListener('input', (e) => {
+            const val = encodeURIComponent(e.target.value);
+            document.getElementById('img').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${val}`;
+        });
+    </script>
+</body>
+</html>

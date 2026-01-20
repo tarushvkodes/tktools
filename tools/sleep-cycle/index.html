@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SleepCycle | Wake Up Refreshed</title>
+</head>
+<body style="background: #2c3e50; color: #f1c40f; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #95a5a6;">← Back</a>
+        <h1>SleepCycle 😴</h1>
+        <div style="background: #34495e; padding: 2rem; border-radius: 12px; border: 1px solid #2c3e50;">
+            <label>I want to wake up at:</label>
+            <input type="time" id="t" value="07:00" style="width:100%; padding:10px; margin-bottom:20px; background: #2c3e50; border: none; color: white;">
+            <div style="text-align: center;">
+                <p>You should go to bed at:</p>
+                <div style="display: flex; justify-content: space-around; gap: 10px;">
+                    <div style="background: #2980b9; color: white; padding: 10px; border-radius: 8px;"><div id="r1">22:00</div><small>6 Cycles</small></div>
+                    <div style="background: #2980b9; color: white; padding: 10px; border-radius: 8px;"><div id="r2">23:30</div><small>5 Cycles</small></div>
+                    <div style="background: #2980b9; color: white; padding: 10px; border-radius: 8px;"><div id="r3">01:00</div><small>4 Cycles</small></div>
+                </div>
+            </div>
+            <p style="font-size: 0.8rem; margin-top: 1rem; color: #95a5a6;">*Assumes 90-minute sleep cycles and 15 mins to fall asleep.</p>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const t = document.getElementById('t').value;
+            if(!t) return;
+            const [h, m] = t.split(':').map(Number);
+            const wake = new Date(); wake.setHours(h, m, 0);
+            function format(date) { return date.getHours().toString().padStart(2, '0') + ":" + date.getMinutes().toString().padStart(2, '0'); }
+            document.getElementById('r1').textContent = format(new Date(wake.getTime() - (90 * 6 + 15) * 60000));
+            document.getElementById('r2').textContent = format(new Date(wake.getTime() - (90 * 5 + 15) * 60000));
+            document.getElementById('r3').textContent = format(new Date(wake.getTime() - (90 * 4 + 15) * 60000));
+        }
+        document.getElementById('t').addEventListener('change', update);
+        update();
+    </script>
+</body>
+</html>

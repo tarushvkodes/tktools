@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DinnerTime | Cooking Schedule</title>
+</head>
+<body style="background: #fdfafd; color: #4a4a4a; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html">← Back</a>
+        <h1>DinnerTime 🍗⏰</h1>
+        <p>Work backwards from your target dinner time.</p>
+        <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <label>Dinner Time</label><input type="time" id="t" value="19:00" style="width:100%; padding:10px; margin-bottom:20px;">
+            <label>Main Dish Time (Min)</label><input type="number" id="m" value="60" style="width:100%; padding:10px; margin-bottom:10px;">
+            <label>Side Dish Time (Min)</label><input type="number" id="s" value="20" style="width:100%; padding:10px; margin-bottom:10px;">
+            <div id="res" style="margin-top: 2rem; border-top: 1px solid #eee; padding-top: 1rem;">
+                <!-- Schedule -->
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const time = document.getElementById('t').value;
+            if(!time) return;
+            const [h, min] = time.split(':').map(Number);
+            const target = new Date(); target.setHours(h, min, 0);
+            function fmt(d) { return d.getHours().toString().padStart(2, '0') + ":" + d.getMinutes().toString().padStart(2, '0'); }
+            const mTime = parseInt(document.getElementById('m').value) || 0;
+            const sTime = parseInt(document.getElementById('s').value) || 0;
+            
+            document.getElementById('res').innerHTML = `
+                <div style="margin-bottom:10px;"><strong>${fmt(new Date(target.getTime() - mTime*60000))}</strong>: Start Main Dish</div>
+                <div style="margin-bottom:10px;"><strong>${fmt(new Date(target.getTime() - sTime*60000))}</strong>: Start Side Dish</div>
+                <div style="color: #2ecc71; font-weight: bold;">${fmt(target)}: DINNER IS SERVED!</div>
+            `;
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('change', update));
+        update();
+    </script>
+</body>
+</html>

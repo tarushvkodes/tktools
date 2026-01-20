@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StepCounter | Calorie Burn</title>
+</head>
+<body style="background: #fab1a0; color: #d63031; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #d63031;">← Back</a>
+        <h1>StepCounter 🚶🔥</h1>
+        <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <label>Steps</label><input type="number" id="s" value="10000" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Weight (kg)</label><input type="number" id="w" value="70" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="background: #ff7675; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 0.9rem;">Estimated Calories Burned</div>
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res">400</span> kcal</div>
+                <p id="dist" style="font-size: 0.8rem; margin-top: 5px;">~7.6 km total distance.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const s = parseFloat(document.getElementById('s').value) || 0;
+            const w = parseFloat(document.getElementById('w').value) || 0;
+            // Rough calc: 0.04 kcal per step per kg
+            const kcal = s * 0.0005 * w; // Simplified common formula
+            document.getElementById('res').textContent = Math.round(kcal);
+            document.getElementById('dist').textContent = "~" + (s * 0.00076).toFixed(1) + " km total distance.";
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

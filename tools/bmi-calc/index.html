@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI | Health Calculator</title>
+</head>
+<body style="background: #00b894; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>BMI_CALC ⚖️🧘</h1>
+        <div style="background: rgba(0,0,0,0.1); padding: 2rem; border-radius: 12px;">
+            <label>Weight (kg)</label><input type="number" id="w" value="70" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Height (cm)</label><input type="number" id="h" value="175" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="background: white; color: #00b894; padding: 2rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 4rem; font-weight: bold;" id="res">22.9</div>
+                <div id="status" style="font-weight: bold; font-size: 1.2rem;">Normal Weight</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const w = parseFloat(document.getElementById('w').value) || 0;
+            const h = parseFloat(document.getElementById('h').value) || 1;
+            const bmi = w / (Math.pow(h/100, 2));
+            document.getElementById('res').textContent = bmi.toFixed(1);
+            let s = "Normal Weight";
+            if(bmi < 18.5) s = "Underweight";
+            else if(bmi > 30) s = "Obese";
+            else if(bmi > 25) s = "Overweight";
+            document.getElementById('status').textContent = s;
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

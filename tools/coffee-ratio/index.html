@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoffeeRatio | The Golden Cup</title>
+</head>
+<body style="background: #6f4e37; color: #fff; font-family: serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #d2b48c;">← Back</a>
+        <h1>CoffeeRatio ☕</h1>
+        <div style="background: #3c2a1e; padding: 2rem; border-radius: 12px;">
+            <label>Method</label>
+            <select id="m" style="width:100%; padding:10px; margin-bottom:20px;">
+                <option value="16">French Press (1:16)</option>
+                <option value="17">Drip / V60 (1:17)</option>
+                <option value="15">Aeropress (1:15)</option>
+                <option value="2">Espresso (1:2)</option>
+            </select>
+            <label>Water Amount (ml/g)</label>
+            <input type="number" id="w" value="300" style="width:100%; padding:10px; margin-bottom:20px;">
+            <div style="text-align: center; border-top: 1px solid #6f4e37; padding-top: 1.5rem;">
+                <div style="font-size: 1.2rem; color: #d2b48c;">Use Exactly</div>
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res">18.8</span>g</div>
+                <div>Ground Coffee</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const w = parseFloat(document.getElementById('w').value) || 0;
+            const r = parseFloat(document.getElementById('m').value);
+            document.getElementById('res').textContent = (w / r).toFixed(1);
+        }
+        document.querySelectorAll('input, select').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

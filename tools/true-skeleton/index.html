@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrueSkeleton | Liquid Loader Generator</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Controls -->
+        <aside class="controls-panel glass-panel">
+            <header>
+                <a href="../../index.html" class="back-link">← TKTools</a>
+                <h2>TrueSkeleton</h2>
+            </header>
+
+            <div class="control-group">
+                <label>Add Elements</label>
+                <div class="button-grid">
+                    <button class="tool-btn" onclick="addElement('rect')">Rectangle</button>
+                    <button class="tool-btn" onclick="addElement('circle')">Circle</button>
+                    <button class="tool-btn" onclick="addElement('text')">Text Line</button>
+                </div>
+            </div>
+
+            <div class="separator"></div>
+
+            <div class="control-group">
+                <label>Corner Radius <span id="val-radius">4px</span></label>
+                <input type="range" id="radius" min="0" max="50" value="4">
+            </div>
+
+            <div class="control-group">
+                <label>Base Color</label>
+                <input type="color" id="base-color" value="#e0e0e0">
+            </div>
+
+            <div class="control-group">
+                <label>Highlight Color</label>
+                <input type="color" id="highlight-color" value="#f5f5f5">
+            </div>
+
+            <div class="control-group">
+                <label>Animation Speed <span id="val-speed">1.5s</span></label>
+                <input type="range" id="speed" min="0.5" max="5.0" step="0.1" value="1.5">
+            </div>
+
+            <div class="output-area">
+                <button id="copy-btn" class="primary-btn">Copy HTML & CSS</button>
+                <div id="copy-feedback">Copied!</div>
+                <button id="clear-btn" class="secondary-btn" style="margin-top: 10px;">Clear Canvas</button>
+            </div>
+        </aside>
+
+        <!-- Canvas -->
+        <main class="canvas-area">
+            <div id="skeleton-canvas" class="skeleton-canvas">
+                <!-- Elements injected here -->
+            </div>
+            <p class="instruction-text">Drag items to position. Grab corners to resize.</p>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

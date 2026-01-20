@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordMorph | Fake Word Generator</title>
+</head>
+<body style="background: #2d3436; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+        <a href="../../index.html" style="color: #636e72;">← Back</a>
+        <h1>WordMorph 🗣️🌀</h1>
+        <p>Generates words that sound real but don't exist.</p>
+        <div id="res" style="font-size: 4rem; font-weight: bold; margin: 3rem 0; color: #55efc4; text-transform: capitalize;">Valerion</div>
+        <div id="btn" style="background: #00b894; padding: 1.5rem; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 1.2rem;">GENERATE WORD</div>
+    </div>
+    <script>
+        const v = "aeiouy";
+        const c = "bcdfghjklmnpqrstvwxz";
+        function gen() {
+            let word = "";
+            const len = Math.floor(Math.random() * 4) + 4;
+            for(let i=0; i<len; i++) {
+                word += (i%2==0) ? c[Math.floor(Math.random()*c.length)] : v[Math.floor(Math.random()*v.length)];
+            }
+            document.getElementById('res').textContent = word;
+        }
+        document.getElementById('btn').addEventListener('click', gen);
+        gen();
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DecisionMatrix | Weighted Scorer</title>
+</head>
+<body style="background: #2d3436; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #636e72;">← Back</a>
+        <h1>DecisionMatrix 📊⚖️</h1>
+        <p>Score your options based on what matters most.</p>
+        <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px; overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">Option</th>
+                        <th>Cost (1-10)</th>
+                        <th>Joy (1-10)</th>
+                        <th>Time (1-10)</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                    <tr>
+                        <td><input type="text" value="New Bike" style="width:100px;"></td>
+                        <td><input type="number" class="val" value="8" style="width:50px;"></td>
+                        <td><input type="number" class="val" value="9" style="width:50px;"></td>
+                        <td><input type="number" class="val" value="2" style="width:50px;"></td>
+                        <td class="res" style="font-weight:bold;">19</td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" value="Gaming PC" style="width:100px;"></td>
+                        <td><input type="number" class="val" value="9" style="width:50px;"></td>
+                        <td><input type="number" class="val" value="10" style="width:50px;"></td>
+                        <td><input type="number" class="val" value="8" style="width:50px;"></td>
+                        <td class="res" style="font-weight:bold;">27</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        function update() {
+            document.querySelectorAll('#tbody tr').forEach(row => {
+                const vals = row.querySelectorAll('.val');
+                let sum = 0;
+                vals.forEach(v => sum += parseInt(v.value) || 0);
+                row.querySelector('.res').textContent = sum;
+            });
+        }
+        document.getElementById('tbody').addEventListener('input', update);
+        update();
+    </script>
+</body>
+</html>

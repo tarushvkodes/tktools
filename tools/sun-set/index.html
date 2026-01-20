@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SunSet | Golden Hour</title>
+</head>
+<body style="background: #ff7e5f; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>SunSet ☀️🌅</h1>
+        <div style="background: rgba(0,0,0,0.2); padding: 2rem; border-radius: 12px;">
+            <label>Approx Sunset Time</label>
+            <input type="time" id="t" value="18:30" style="width:100%; padding:10px; margin-bottom:20px;">
+            <div style="background: #feb47b; color: #d35400; padding: 1.5rem; border-radius: 10px;">
+                <div>Golden Hour Starts Approx</div>
+                <div style="font-size: 3rem; font-weight: bold;" id="res">17:30</div>
+                <p style="font-size: 0.8rem; margin-top: 10px;">*The best light for photography, approx 1 hour before sunset.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const t = document.getElementById('t').value;
+            if(!t) return;
+            const [h, m] = t.split(':').map(Number);
+            const date = new Date(); date.setHours(h - 1, m, 0);
+            document.getElementById('res').textContent = date.getHours().toString().padStart(2, '0') + ":" + date.getMinutes().toString().padStart(2, '0');
+        }
+        document.getElementById('t').addEventListener('change', update);
+        update();
+    </script>
+</body>
+</html>

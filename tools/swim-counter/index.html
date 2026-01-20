@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwimCounter | Lap Tracker</title>
+    <style>
+        body { background: #0077be; color: white; font-family: sans-serif; text-align: center; padding: 2rem; }
+        .app { max-width: 400px; margin: auto; }
+        .lap-circle { width: 200px; height: 200px; border: 10px solid rgba(255,255,255,0.3); border-radius: 50%; margin: 2rem auto; display: flex; align-items: center; justify-content: center; font-size: 5rem; font-weight: bold; cursor: pointer; user-select: none; }
+        .lap-circle:active { background: rgba(255,255,255,0.1); }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html" style="color: rgba(255,255,255,0.6);">← Back</a>
+        <h1>SwimCounter 🏊‍♂️🌊</h1>
+        <div class="lap-circle" id="c" onclick="inc()">0</div>
+        <p>Tap the circle to count a lap.</p>
+        <button onclick="reset()" style="background:none; border:1px solid white; color:white; padding:10px 20px; border-radius:5px; cursor:pointer;">RESET</button>
+    </div>
+    <script>
+        let count = 0;
+        function inc() { count++; document.getElementById('c').textContent = count; }
+        function reset() { count = 0; document.getElementById('c').textContent = count; }
+    </script>
+</body>
+</html>

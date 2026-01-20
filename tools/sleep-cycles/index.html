@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SleepCycles | Wake Up Guide</title>
+    <style>
+        body { background: #0f172a; color: #e2e8f0; font-family: sans-serif; padding: 2rem; text-align: center; }
+        .app { max-width: 600px; margin: auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-top: 2rem; }
+        .box { background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; border: 1px solid #334155; }
+        .time { font-size: 1.5rem; font-weight: bold; color: #38bdf8; }
+        input { padding: 10px; border-radius: 8px; border: none; background: #1e293b; color: white; width: 100%; margin-bottom: 1rem; font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html" style="color: #64748b;">← Back</a>
+        <h1>SleepCycles 🌙🛌</h1>
+        <p>Wake up between 90-minute sleep cycles to feel refreshed.</p>
+        <label>I want to wake up at:</label>
+        <input type="time" id="t" value="07:00">
+        <div class="grid" id="res"></div>
+        <p style="margin-top: 2rem; color: #64748b; font-size: 0.8rem;">Recommended bedtime (includes 15 mins to fall asleep).</p>
+    </div>
+    <script>
+        function update() {
+            const val = document.getElementById('t').value;
+            if(!val) return;
+            const [h, m] = val.split(':').map(Number);
+            const wake = new Date(); wake.setHours(h, m, 0);
+            function fmt(d) { return d.getHours().toString().padStart(2, '0') + ":" + d.getMinutes().toString().padStart(2, '0'); }
+            const cycles = [6, 5, 4];
+            document.getElementById('res').innerHTML = cycles.map(c => `
+                <div class="box">
+                    <div class="time">${fmt(new Date(wake.getTime() - (c * 90 + 15) * 60000))}</div>
+                    <div style="font-size: 0.8rem;">${c} Cycles</div>
+                </div>
+            `).join('');
+        }
+        document.getElementById('t').addEventListener('change', update);
+        update();
+    </script>
+</body>
+</html>

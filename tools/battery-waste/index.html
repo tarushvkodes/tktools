@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BatteryWaste | Environmental Impact</title>
+</head>
+<body style="background: #2d3436; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #636e72;">← Back</a>
+        <h1>BatteryWaste 🔋🗑️</h1>
+        <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px;">
+            <label>Devices using AA/AAA</label><input type="number" id="d" value="5" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Avg Swaps Per Year Per Device</label><input type="number" id="s" value="4" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="background: #e17055; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res">40</span> Batteries</div>
+                <div>Discarded Per Year</div>
+                <p id="cost" style="font-size: 0.8rem; margin-top: 10px;">Costing approx $30/yr. Consider rechargeables!</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const d = parseFloat(document.getElementById('d').value) || 0;
+            const s = parseFloat(document.getElementById('s').value) || 0;
+            const total = d * s * 2; // assuming 2 per device
+            document.getElementById('res').textContent = total;
+            document.getElementById('cost').textContent = `Costing approx $${Math.round(total * 0.75)}/yr. Consider rechargeables!`;
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

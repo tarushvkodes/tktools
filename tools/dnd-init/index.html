@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DndInit | Combat Tracker</title>
+    <style>
+        body { background: #1a1a1a; color: #eee; font-family: 'Segoe UI', sans-serif; padding: 2rem; }
+        .app { max-width: 600px; margin: auto; }
+        .row { display: flex; gap: 10px; margin-bottom: 10px; }
+        input { background: #333; border: 1px solid #444; color: white; padding: 10px; border-radius: 5px; flex: 1; }
+        button { background: #9b59b6; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+        .card { background: #2d2d2d; padding: 1rem; margin-bottom: 5px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border-left: 5px solid #9b59b6; }
+        .init-val { font-size: 1.5rem; font-weight: bold; width: 40px; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html" style="color: #888;">← Back</a>
+        <h1>DndInit ⚔️🎲</h1>
+        <div class="row">
+            <input type="text" id="name" placeholder="Character Name">
+            <input type="number" id="val" placeholder="Init" style="width: 80px;">
+            <button onclick="add()">ADD</button>
+        </div>
+        <div id="list"></div>
+        <button onclick="clearAll()" style="margin-top: 2rem; background: #e74c3c;">CLEAR ALL</button>
+    </div>
+    <script>
+        function render() {
+            const data = JSON.parse(localStorage.getItem('tk-init') || '[]');
+            data.sort((a, b) => b.val - a.val);
+            document.getElementById('list').innerHTML = data.map((c, i) => `
+                <div class="card">
+                    <div class="init-val">${c.val}</div>
+                    <div style="flex:1; margin-left: 10px;">${c.name}</div>
+                    <button onclick="del(${i})" style="background:transparent; color:#555;">X</button>
+                </div>
+            `).join('');
+        }
+        function add() {
+            const name = document.getElementById('name').value;
+            const val = parseInt(document.getElementById('val').value) || 0;
+            if(!name) return;
+            const data = JSON.parse(localStorage.getItem('tk-init') || '[]');
+            data.push({name, val});
+            localStorage.setItem('tk-init', JSON.stringify(data));
+            document.getElementById('name').value = '';
+            document.getElementById('val').value = '';
+            render();
+        }
+        function del(i) {
+            const data = JSON.parse(localStorage.getItem('tk-init') || '[]');
+            data.splice(i, 1);
+            localStorage.setItem('tk-init', JSON.stringify(data));
+            render();
+        }
+        function clearAll() { localStorage.removeItem('tk-init'); render(); }
+        render();
+    </script>
+</body>
+</html>

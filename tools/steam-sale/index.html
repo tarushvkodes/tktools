@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SteamSale | Deal Verifier</title>
+</head>
+<body style="background: #171a21; color: #c7d5e0; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #66c0f4;">← Back</a>
+        <h1 style="color: #66c0f4;">SteamSale 🎮💸</h1>
+        <div style="background: #2a475e; padding: 2rem; border-radius: 12px; border: 1px solid #1b2838;">
+            <label>Current Price ($)</label><input type="number" id="c" value="14.99" style="width:100%; padding:10px; margin-bottom:15px; background: #1b2838; border: 1px solid #171a21; color: white;">
+            <label>Historical Low ($ - Check SteamDB)</label><input type="number" id="l" value="9.99" style="width:100%; padding:10px; margin-bottom:15px; background: #1b2838; border: 1px solid #171a21; color: white;">
+            <div style="background: #5c7e10; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 2rem; font-weight: bold;"><span id="res">33</span>% Off Low</div>
+                <p id="verdict">It's a decent deal, but has been cheaper.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const c = parseFloat(document.getElementById('c').value) || 0;
+            const l = parseFloat(document.getElementById('l').value) || 0;
+            const diff = c - l;
+            const percent = (diff / c) * 100;
+            document.getElementById('res').textContent = Math.round(percent);
+            let v = "Historical Low! Buy now!";
+            if(c > l) v = `It's $${diff.toFixed(2)} above historical low.`;
+            document.getElementById('verdict').textContent = v;
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

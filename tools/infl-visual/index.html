@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InflVisual | Purchase Power</title>
+    <style>
+        body { background: #34495e; color: white; font-family: sans-serif; padding: 2rem; }
+        .app { max-width: 600px; margin: auto; }
+        .row { display: flex; align-items: flex-end; gap: 2rem; height: 200px; margin-top: 3rem; }
+        .bar { flex: 1; background: #2ecc71; position: relative; border-radius: 5px 5px 0 0; }
+        .bar.lost { background: #e74c3c; height: 60%; }
+        .label { position: absolute; bottom: -25px; width: 100%; text-align: center; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <a href="../../index.html" style="color: #bdc3c7;">← Back</a>
+        <h1>InflVisual 💸📉</h1>
+        <p>Purchasing power of $100 after 10 years at 3% inflation.</p>
+        <div class="row">
+            <div class="bar" style="height: 100%;"><div class="label">Today ($100)</div></div>
+            <div class="bar lost"><div class="label">10yr Later ($74)</div></div>
+        </div>
+        <p style="margin-top: 4rem; font-size: 0.9rem; color: #bdc3c7;">*Visual estimation of value loss over time.</p>
+    </div>
+</body>
+</html>

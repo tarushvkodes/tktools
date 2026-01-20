@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoffeeCaffeine | Estimator</title>
+</head>
+<body style="background: #3e2723; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #d7ccc8;">← Back</a>
+        <h1>CoffeeCaffeine ☕⚡</h1>
+        <div style="background: #4e342e; padding: 2rem; border-radius: 12px;">
+            <label>Brew Method</label>
+            <select id="m" style="width:100%; padding:10px; margin-bottom:15px;">
+                <option value="12">Drip / Filter (12mg/oz)</option>
+                <option value="64">Espresso (64mg/shot)</option>
+                <option value="15">French Press (15mg/oz)</option>
+                <option value="20">Cold Brew (20mg/oz)</option>
+            </select>
+            <label>Serving Size (oz)</label>
+            <input type="number" id="s" value="8" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="background: white; color: #3e2723; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res">96</span> mg</div>
+                <div>Estimated Caffeine</div>
+                <p style="font-size: 0.8rem; margin-top: 5px;">*Adult daily limit: ~400mg</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const m = parseFloat(document.getElementById('m').value);
+            const s = parseFloat(document.getElementById('s').value) || 0;
+            const mg = m * s;
+            document.getElementById('res').textContent = Math.round(mg);
+        }
+        document.querySelectorAll('input, select').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

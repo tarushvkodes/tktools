@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhScale | Acid/Base Guide</title>
+    <style>
+        body { background: #fdfafd; font-family: sans-serif; padding: 2rem; }
+        .scale { height: 50px; background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff); border-radius: 25px; position: relative; margin: 3rem 0; }
+        .pointer { position: absolute; top: -10px; width: 4px; height: 70px; background: #000; transition: left 0.3s; }
+        .label { font-size: 2rem; font-weight: bold; text-align: center; }
+    </style>
+</head>
+<body>
+    <div style="max-width: 800px; margin: auto;">
+        <a href="../../index.html">← Back</a>
+        <h1>PhScale 🧪💧</h1>
+        <input type="range" id="r" min="0" max="14" step="0.1" value="7" style="width:100%;">
+        <div class="scale"><div class="pointer" id="p" style="left: 50%;"></div></div>
+        <div class="label" id="l">pH 7.0 (Neutral)</div>
+        <p id="ex" style="text-align: center;">Pure Water</p>
+    </div>
+    <script>
+        const examples = ["Battery Acid", "Stomach Acid", "Lemon Juice", "Vinegar", "Tomato Juice", "Coffee", "Milk", "Pure Water", "Sea Water", "Baking Soda", "Milk of Magnesia", "Ammonia", "Soapy Water", "Bleach", "Drain Cleaner"];
+        document.getElementById('r').addEventListener('input', (e) => {
+            const val = parseFloat(e.target.value);
+            document.getElementById('p').style.left = (val / 14 * 100) + "%";
+            document.getElementById('l').textContent = "pH " + val.toFixed(1) + (val < 7 ? " (Acidic)" : (val > 7 ? " (Alkaline)" : " (Neutral)"));
+            document.getElementById('ex').textContent = examples[Math.round(val)];
+        });
+    </script>
+</body>
+</html>

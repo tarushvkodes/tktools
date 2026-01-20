@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrinkCool | Freezer Timer</title>
+</head>
+<body style="background: #e1f5fe; color: #0277bd; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html">← Back</a>
+        <h1>DrinkCool ❄️</h1>
+        <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <label>Container Type</label>
+            <select id="t" style="width:100%; padding:10px; margin-bottom:15px;">
+                <option value="1">Aluminum Can</option>
+                <option value="1.8">Glass Bottle</option>
+                <option value="2.5">Plastic Bottle (Large)</option>
+            </select>
+            <label>Starting Temp</label>
+            <select id="s" style="width:100%; padding:10px; margin-bottom:15px;">
+                <option value="22">Room Temp (22°C)</option>
+                <option value="30">Warm Day (30°C)</option>
+            </select>
+            <div style="background: #0277bd; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res">15</span> min</div>
+                <div>Until Optimal (4°C)</div>
+                <p style="font-size: 0.8rem; margin-top: 5px;">*In a standard freezer (-18°C).</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const t = parseFloat(document.getElementById('t').value);
+            const s = parseFloat(document.getElementById('s').value);
+            // Rough physics approximation: Cans take ~15 mins from room temp
+            const time = 15 * t * (s/22);
+            document.getElementById('res').textContent = Math.round(time);
+        }
+        document.querySelectorAll('select').forEach(i => i.addEventListener('change', update));
+        update();
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OilChange | Service Estimator</title>
+</head>
+<body style="background: #333; color: #f1c40f; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: #888;">← Back</a>
+        <h1>OilChange 🚗🛢️</h1>
+        <div style="background: #222; padding: 2rem; border-radius: 12px; border: 1px solid #444;">
+            <label>Avg Miles Per Week</label><input type="number" id="m" value="250" style="width:100%; padding:10px; margin-bottom:15px; background: #111; border: 1px solid #555; color: #f1c40f;">
+            <label>Change Interval (Miles)</label><input type="number" id="i" value="5000" style="width:100%; padding:10px; margin-bottom:15px; background: #111; border: 1px solid #555; color: #f1c40f;">
+            <div style="background: #f1c40f; color: #222; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 0.9rem; font-weight: bold;">NEXT SERVICE IN</div>
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res">20</span> Weeks</div>
+                <div id="date" style="font-weight: bold;">approx. June 2026</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const m = parseFloat(document.getElementById('m').value) || 1;
+            const i = parseFloat(document.getElementById('i').value) || 0;
+            const weeks = i / m;
+            document.getElementById('res').textContent = Math.round(weeks);
+            const d = new Date(); d.setDate(d.getDate() + (weeks * 7));
+            document.getElementById('date').textContent = "approx. " + d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

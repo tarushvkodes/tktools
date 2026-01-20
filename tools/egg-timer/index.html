@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EggTimer | Perfect Boiled Eggs</title>
+</head>
+<body style="background: #f1c40f; color: #2c3e50; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html">← Back</a>
+        <h1>EggTimer 🥚</h1>
+        <div style="background: white; padding: 2rem; border-radius: 12px; text-align: center;">
+            <label>Egg Size</label>
+            <select id="s" style="width:100%; padding:10px; margin-bottom:15px;">
+                <option value="1">Medium</option>
+                <option value="1.1" selected>Large</option>
+                <option value="1.2">Jumbo</option>
+            </select>
+            <label>Desired Doneness</label>
+            <select id="d" style="width:100%; padding:10px; margin-bottom:15px;">
+                <option value="6">Soft Boiled (Runny)</option>
+                <option value="8">Medium Boiled (Jammy)</option>
+                <option value="10">Hard Boiled (Solid)</option>
+            </select>
+            <div style="background: #2c3e50; color: white; padding: 1.5rem; border-radius: 10px; margin-top: 1rem;">
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res">8.8</span> min</div>
+                <div>Timer Setting</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const s = parseFloat(document.getElementById('s').value);
+            const d = parseFloat(document.getElementById('d').value);
+            document.getElementById('res').textContent = (d * s).toFixed(1);
+        }
+        document.querySelectorAll('select').forEach(i => i.addEventListener('change', update));
+        update();
+    </script>
+</body>
+</html>

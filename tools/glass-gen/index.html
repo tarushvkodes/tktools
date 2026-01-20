@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlassGen | CSS Glassmorphism</title>
+    <style>
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; font-family: sans-serif; padding: 2rem; color: white; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 900px; margin: auto; }
+        .preview { height: 300px; display: flex; align-items: center; justify-content: center; background: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80'); background-size: cover; border-radius: 20px; }
+        .card { width: 200px; height: 200px; }
+        input { width: 100%; }
+        pre { background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <div class="grid">
+        <div class="controls">
+            <a href="../../index.html" style="color: rgba(255,255,255,0.6);">← Back</a>
+            <h1>GlassGen 💎✨</h1>
+            <label>Blur: <span id="bv">10px</span></label><input type="range" id="b" min="0" max="20" value="10">
+            <label>Opacity: <span id="ov">0.2</span></label><input type="range" id="o" min="0" max="1" step="0.05" value="0.2">
+            <pre id="code"></pre>
+        </div>
+        <div class="preview"><div class="card" id="pc"></div></div>
+    </div>
+    <script>
+        function update() {
+            const b = document.getElementById('b').value;
+            const o = document.getElementById('o').value;
+            const style = `background: rgba(255, 255, 255, ${o});\nbackdrop-filter: blur(${b}px);\n-webkit-backdrop-filter: blur(${b}px);\nborder: 1px solid rgba(255, 255, 255, 0.3);\nborder-radius: 20px;`;
+            document.getElementById('pc').style.cssText = style;
+            document.getElementById('code').textContent = style;
+            document.getElementById('bv').textContent = b + "px";
+            document.getElementById('ov').textContent = o;
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>

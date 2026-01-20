@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BattlePass | Completion Estimator</title>
+</head>
+<body style="background: #6c5ce7; color: white; font-family: sans-serif; padding: 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <a href="../../index.html" style="color: white;">← Back</a>
+        <h1>BattlePass ⚔️🎟️</h1>
+        <div style="background: rgba(0,0,0,0.2); padding: 2rem; border-radius: 12px;">
+            <label>Current Tier</label><input type="number" id="c" value="45" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Target Tier</label><input type="number" id="t" value="100" style="width:100%; padding:10px; margin-bottom:15px;">
+            <label>Days Remaining</label><input type="number" id="d" value="14" style="width:100%; padding:10px; margin-bottom:15px;">
+            <div style="background: white; color: #6c5ce7; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div style="font-size: 0.9rem;">Required Pace</div>
+                <div style="font-size: 3rem; font-weight: bold;"><span id="res">3.9</span> Tiers/Day</div>
+                <p id="msg" style="font-size: 0.8rem; margin-top: 10px;">Gonna need some serious grinding!</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update() {
+            const c = parseFloat(document.getElementById('c').value) || 0;
+            const t = parseFloat(document.getElementById('t').value) || 0;
+            const d = parseFloat(document.getElementById('d').value) || 1;
+            const pace = (t - c) / d;
+            document.getElementById('res').textContent = pace.toFixed(1);
+            document.getElementById('msg').textContent = pace > 5 ? "Better start buying tiers..." : (pace > 2 ? "Gonna need some serious grinding!" : "Easy win!");
+        }
+        document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>
